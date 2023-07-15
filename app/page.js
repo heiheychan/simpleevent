@@ -1,13 +1,14 @@
-import MainHeader from "./components/MainHeader";
-import MainPortal from "./components/MainPortal";
+import HomeHeader from "./components/HomeHeader";
+import HomeForm from "./components/HomeForm";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div>
-      <main className="bg-slate-200 min-h-screen flex flex-col items-center ">
-        <MainHeader />
-        <MainPortal />
-      </main>
-    </div>
+    <main className="flex flex-col items-center pt-12 px-4">
+      {/* HEADER SECTION */}
+      <HomeHeader />
+      <HomeForm />
+      <Footer />
+    </main>
   );
 }

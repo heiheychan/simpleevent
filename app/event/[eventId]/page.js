@@ -1,4 +1,4 @@
-import EventFood from "./components/eventFood";
+import EventFood from "./components/EventFood";
 
 
 export default function page(props) {

@@ -1,17 +1,27 @@
 import NavBar from "./components/NavBar";
+import { NextAuthProvider } from "./providers";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 import "./globals.css";
 
 export const metadata = {
-  title: "BYOB!",
-  description: "An amazin app for managing your byob events",
+  title: "Simple event",
+  description: "A simple event app",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+
+  const session = await getServerSession(authOptions);
+
+  console.log("server side", session)
+
   return (
     <html lang="en">
       <body>
-        <NavBar />
-        {children}
+        <NextAuthProvider>
+          { session?.user.email ? <NavBar /> : null}
+          {children}
+        </NextAuthProvider>
       </body>
     </html>
   );
