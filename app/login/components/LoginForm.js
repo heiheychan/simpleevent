@@ -44,7 +44,7 @@ export default function LoginForm({ email }) {
         value={enteredPassword}
         setValue={setPasswordHandler}
       />
-      <Button content="Log in" onClickHandler={onClickHandler} />
+      <Button content="Log in" onClickHandler={onClickHandler} bgcolor="bg-red-500" />
     </div>
   );
 }

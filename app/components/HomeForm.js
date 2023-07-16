@@ -62,7 +62,7 @@ export default function HomeForm() {
         value={email}
         setValue={setEmailHandler}
       />
-      <Button content="Log in / Sign up" onClickHandler={formSubmitHandler} />
+      <Button content="Log in / Sign up" onClickHandler={formSubmitHandler} bgcolor="bg-red-500" />
     </div>
   );
 }

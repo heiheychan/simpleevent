@@ -10,17 +10,18 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-
   const session = await getServerSession(authOptions);
 
-  console.log("server side", session)
+  console.log("server side", session);
 
   return (
     <html lang="en">
       <body>
         <NextAuthProvider>
-          { session?.user.email ? <NavBar /> : null}
-          {children}
+          {session?.user.email ? <NavBar /> : null}
+          <main className="flex flex-col items-center pt-12 px-4">
+            {children}
+          </main>
         </NextAuthProvider>
       </body>
     </html>

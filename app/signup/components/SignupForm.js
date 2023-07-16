@@ -76,7 +76,7 @@ export default function SignupForm({ email }) {
         setValue={enteredPasswordHandler}
         subtextcolor={passwordLevel.color}
       />
-      <Button content="Sign up" onClickHandler={onClickHandler} />
+      <Button content="Sign up" onClickHandler={onClickHandler} bgcolor="bg-red-500" />
     </div>
   );
 }

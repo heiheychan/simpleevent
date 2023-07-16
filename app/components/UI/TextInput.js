@@ -9,7 +9,11 @@ export default function TextInput({
   subtext,
   subtextcolor,
   disable,
+  min,
+  max
 }) {
+
+  const subtextClass = `text-xs ${subtextcolor} w-full`;
   return (
     <div className="w-full my-2">
       <p className="w-full font-bold">{label}</p>
@@ -20,8 +24,10 @@ export default function TextInput({
         value={value}
         onChange={setValue}
         disabled={disable ? "disabled" : ""}
+        min={min}
+        max={max}
       ></input>
-      <p className={`text-xs ${subtextcolor} w-full`}>{subtext}</p>
+      <p className={subtextClass}>{subtext}</p>
     </div>
   );
 }
