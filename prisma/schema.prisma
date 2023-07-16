@@ -27,6 +27,7 @@ model Event {
   name            String
   datetime        DateTime
   location        String
+  maxguests       Int
   users           EventsOnUsers[] 
   foods           Food[]
 

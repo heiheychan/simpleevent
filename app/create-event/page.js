@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import validator from "validator";
+import { useRouter } from 'next/navigation'
 
 import Button from "@/app/components/UI/Button";
 import DatetimePicker from "@/app/components/UI/DatetimePicker";
@@ -11,10 +12,12 @@ import OneFood from "./components/oneFood";
 import { defaultFoodList } from "@/lib/defaultFoodList";
 import AddFoodButton from "./components/addFoodButton";
 import FixedBanner from "../components/UI/FixedBanner";
+import axios from "axios";
 
 export default function CreateEvent() {
   const [foodList, setFoodList] = useState(defaultFoodList);
   const [errors, setErrors] = useState([]);
+  const router = useRouter();
 
   // Switching pages
   const [firstPage, setFirstPage] = useState(true);
@@ -74,8 +77,21 @@ export default function CreateEvent() {
     });
   };
 
-  // Handle form submission
-  // Validate inputs
+  // ******Handle form submission******
+  // **Validate inputs**
+  // Validate food list
+  const checkFoodListError = (fl) => {
+    let valid = true;
+
+    fl.forEach((ele) => {
+      if (ele.name.length === 0) {
+        valid = valid && false;
+      }
+    });
+
+    return valid;
+  };
+
   const validationSchema = [
     {
       valid: validator.isLength(enteredName, {
@@ -92,34 +108,66 @@ export default function CreateEvent() {
       valid: validator.isLength(enteredLocation, { min: 1, max: 100 }),
       errorMessage: "Location is invalid",
     },
+    {
+      valid: checkFoodListError(foodList),
+      errorMessage: "Food list is invalid",
+    },
   ];
 
+  const processFoodList = (fl) => {
+    const newfl = fl.map((ele, index) => {
+      return { ...ele, order: index };
+    });
+
+    setFoodList(newfl);
+  };
+
+  // It's dangerous to have useState inside useEffect
   useEffect(() => {
-    console.log(errors)
+    if (errors.length === 0) {
+      return;
+    }
     const timeoutObject = setTimeout(() => {
-      setErrors([])
-    }, 2000)
+      setErrors([]);
+    }, 2000);
 
     return () => {
-      clearTimeout(timeoutObject)
-    }
-  }, [errors, setErrors])
+      clearTimeout(timeoutObject);
+    };
+  }, [errors]);
 
-  const formSubmission = () => {
+  const formSubmission = async () => {
+    console.log("been here --- formSubmission function")
+    setErrors([]);
 
+    // Validate page 1 input
     validationSchema.forEach((check) => {
-      setErrors([]);
-
+      console.log(check)
       if (!check.valid) {
         setErrors((old) => [...old, check.errorMessage]);
         return;
       }
     });
 
-    
+    if (errors.length > 0) {
+      return;
+    }
+
+    // Add order value to the food list
+    processFoodList(foodList);
+
+    const response = await axios.post("http://localhost:3000/api/event/createevent", {
+      name: enteredName,
+      eventdatetime: enteredDatetime,
+      location: enteredLocation,
+      numguest: enteredNumGuest,
+      foodlist: [...foodList]
+    })
+
+    if (response.status === 200) {
+      router.push("/dashboard");
+    }
   };
-
-
 
   // Page 1 content
   const page1 = (
@@ -145,7 +193,7 @@ export default function CreateEvent() {
         />
         <TextInput
           label="Location*"
-          placeholder="Bill's backyard*"
+          placeholder="Bill's backyard"
           type="text"
           value={enteredLocation}
           setValue={setEnteredLocationHandler}
@@ -156,6 +204,7 @@ export default function CreateEvent() {
           min="0"
           max="100"
           subtext="Between 1 to 100"
+          placeholder={10}
           value={enteredNumGuest}
           setValue={setEnteredNumGuestHandler}
         />
@@ -171,7 +220,9 @@ export default function CreateEvent() {
   // Page 2
   const page2 = (
     <>
-      {errors.length > 1 && (<FixedBanner messages={errors} color="bg-red-500" />)}
+      {errors.length > 1 && (
+        <FixedBanner messages={errors} color="bg-red-500" />
+      )}
       <div className="w-full max-w-[400px]">
         <h1 className="text-2xl font-bold mb-3">What to bring?</h1>
         <p className="text-gray-500">
