@@ -8,7 +8,7 @@ import FixedBanner from "@/app/components/UI/FixedBanner";
 import TextInput from "@/app/components/UI/TextInput";
 
 export default function LoginForm({ email }) {
-  const error = false;
+  const error = [];
 
   const [enteredPassword, setEnteredPassword] = useState();
 
@@ -27,8 +27,8 @@ export default function LoginForm({ email }) {
 
   return (
     <div className="w-full flex flex-col max-w-[400px] mt-6">
-      {error && (
-        <FixedBanner color="bg-red-500" message="Email cannot be empty" />
+      {error.length > 0 && (
+        <FixedBanner color="bg-red-500" messages={error} />
       )}
       <TextInput
         type="text"

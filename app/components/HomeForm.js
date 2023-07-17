@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { setCookie } from 'cookies-next';
 import validator from "validator";
@@ -12,18 +12,8 @@ import FixedBanner from "./UI/FixedBanner";
 
 export default function HomeForm() {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState([]);
   const router = useRouter();
-
-  useEffect(() => {
-    const timeoutObject = setTimeout(() => {
-      setError(false);
-    }, 2000);
-
-    return () => {
-      clearTimeout(timeoutObject);
-    };
-  }, [error]);
 
   const setEmailHandler = (e) => {
     setEmail(e.target.value);
@@ -33,7 +23,7 @@ export default function HomeForm() {
     e.preventDefault();
 
     if (!validator.isEmail(email)) {
-      setError(true);
+      setError(["Email cannot be empty"]);
       return;
     }
 
@@ -55,7 +45,7 @@ export default function HomeForm() {
 
   return (
     <div className="w-full flex flex-col max-w-[400px] mt-6">
-      {error && <FixedBanner color="bg-red-500" message="Email cannot be empty" />}
+      {error.length > 0 && <FixedBanner color="bg-red-500" messages={error} setMessages={setError}/>}
       <TextInput
         placeholder="example@example.com"
         label="Enter your email to proceed"

@@ -123,33 +123,34 @@ export default function CreateEvent() {
   };
 
   // It's dangerous to have useState inside useEffect
-  useEffect(() => {
-    if (errors.length === 0) {
-      return;
-    }
-    const timeoutObject = setTimeout(() => {
-      setErrors([]);
-    }, 2000);
+  // useEffect(() => {
+  //   if (errors.length === 0) {
+  //     return;
+  //   }
+  //   const timeoutObject = setTimeout(() => {
+  //     setErrors([]);
+  //   }, 2000);
 
-    return () => {
-      clearTimeout(timeoutObject);
-    };
-  }, [errors]);
+  //   return () => {
+  //     clearTimeout(timeoutObject);
+  //   };
+  // }, [errors]);
 
   const formSubmission = async () => {
-    console.log("been here --- formSubmission function")
     setErrors([]);
+    let tempError = [];
 
     // Validate page 1 input
     validationSchema.forEach((check) => {
-      console.log(check)
       if (!check.valid) {
-        setErrors((old) => [...old, check.errorMessage]);
+        tempError.push(check.errorMessage);
         return;
       }
     });
 
-    if (errors.length > 0) {
+    setErrors(tempError);
+
+    if (tempError.length > 0) {
       return;
     }
 
@@ -221,7 +222,7 @@ export default function CreateEvent() {
   const page2 = (
     <>
       {errors.length > 1 && (
-        <FixedBanner messages={errors} color="bg-red-500" />
+        <FixedBanner messages={errors} color="bg-red-500" setMessages={setErrors}/>
       )}
       <div className="w-full max-w-[400px]">
         <h1 className="text-2xl font-bold mb-3">What to bring?</h1>

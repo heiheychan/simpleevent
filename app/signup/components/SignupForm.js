@@ -11,7 +11,7 @@ import { checkPasswordStrength } from "@/lib/checkPasswordStrength";
 import { signIn } from "next-auth/react";
 
 export default function SignupForm({ email }) {
-  const error = false;
+  const error = [];
   const router = useRouter();
 
   const [enteredName, setEnteredName] = useState("");
@@ -36,7 +36,6 @@ export default function SignupForm({ email }) {
         name: enteredName,
       })
       .catch((error) => {
-        console.log(error);
         router.push("/");
       });
     
@@ -50,8 +49,8 @@ export default function SignupForm({ email }) {
 
   return (
     <div className="w-full flex flex-col max-w-[400px] mt-6">
-      {error && (
-        <FixedBanner color="bg-red-500" message="Email cannot be empty" />
+      {error.length > 0 && (
+        <FixedBanner color="bg-red-500" messages={error} />
       )}
       <TextInput
         placeholder="example@example.com"
