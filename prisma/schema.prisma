@@ -17,6 +17,7 @@ model User {
   email_verified  Boolean       @default(false)
   password        String
   events          EventsOnUsers[]
+  commitments     Commitment[]
 
   created_at      DateTime      @default(now())
   updated_at      DateTime      @updatedAt
@@ -54,6 +55,19 @@ model Food {
   order           Int
   event           Event @relation(fields: [eventId], references: [id])
   eventId         Int
+  commitments     Commitment[]
+
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @updatedAt
+}
+
+model Commitment {
+  id              Int           @id @default(autoincrement())
+  foodId          Int
+  food            Food @relation(fields: [foodId], references: [id])
+  userId          Int
+  user            User @relation(fields: [userId], references: [id])
+  comment         String        @default("")
 
   created_at      DateTime      @default(now())
   updated_at      DateTime      @updatedAt
