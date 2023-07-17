@@ -30,8 +30,6 @@ export default async function Dashboard() {
 
   const events = await fetchEvents();
 
-  console.log(events[0].event.datetime);
-
   return (
     <div className="w-full max-w-[400px] flex flex-col">
       <div className="flex flex-row justify-between items-center">

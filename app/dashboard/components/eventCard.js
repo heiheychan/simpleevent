@@ -5,16 +5,17 @@ import CopyButton from "@/app/components/CopyButton";
 
 export default function EventCard({ id, datetime, name, location }) {
   const utc = new Date(datetime);
-  const offset = utc.getTimezoneOffset();
-  const local = new Date(utc.getTime() - offset * 60000);
 
-  const day = dayList[local.getDay()];
-  const month = local.getMonth();
-  const date = local.getDate();
-  let hour = local.getHours();
+  const day = dayList[utc.getDay()];
+  const month = utc.getMonth() + 1;
+  const date = utc.getDate();
+  let hour = utc.getHours();
   const ampm = hour < 13 ? "AM" : "PM";
   hour = hour % 12;
-  const min = local.getMinutes();
+  let min = utc.getMinutes();
+  if (min === 0) {
+    min = min.toString() + "0";
+  }
 
   return (
     <>

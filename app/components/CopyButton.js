@@ -6,7 +6,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import FixedBanner from "@/app/components/UI/FixedBanner";
 import { useState } from "react";
 
-export default function CopyButton({ name, id}) {
+export default function CopyButton({ name, id }) {
   const [copied, setCopied] = useState([]);
 
   const copyClickHandler = (e) => {
@@ -17,11 +17,14 @@ export default function CopyButton({ name, id}) {
 
   return (
     <>
-      <FixedBanner
-        messages={copied}
-        setMessages={setCopied}
-        color="bg-green-500"
-      />
+      {copied.length > 0 && (
+        <FixedBanner
+          messages={copied}
+          setMessages={setCopied}
+          color="bg-green-500"
+        />
+      )}
+
       <CopyToClipboard
         text={`
           You are invited to ${name}!
