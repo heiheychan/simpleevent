@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { PiBowlFoodFill } from "react-icons/pi";
 import FoodCard from "./foodCard";
 
-export default function EventFoodList({ eventId }) {
+export default function EventFoodList({ eventId, maxguests }) {
   const [foodList, setFoodList] = useState([]);
 
   useEffect(() => {
@@ -35,6 +35,8 @@ export default function EventFoodList({ eventId }) {
               id={food.id}
               key={food.id}
               name={food.name}
+              maxguests={maxguests}
+              commitments={food.commitments}
             />
           );
         })}

@@ -25,7 +25,7 @@ export default async function EventDetail({ params }) {
         />
       </div>
       {/* Food list */}
-      <EventFoodList eventId={eventId} />
+      <EventFoodList eventId={eventId} maxguests={event.maxguests} />
     </div>
   );
 }

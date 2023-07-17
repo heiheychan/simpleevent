@@ -8,9 +8,20 @@ import axios from "axios";
 import CommitmentModal from "./commitmentModal";
 import FixedBanner from "@/app/components/UI/FixedBanner";
 
-export default function FoodCard({ name, id }) {
+export default function FoodCard({ name, id, maxguests, commitments }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [messages, setMessages] = useState([])
+
+  const calculateWidth = () => {
+    if (commitments.length === 0) {
+      return "w-0"
+    } else {
+      console.log((commitments.length / maxguests) * 150)
+      let width = `w-[${Math.ceil((commitments.length / maxguests) * 150).toString()}px]`
+      console.log(width);
+      return width
+    }
+  }
 
   const modalOpenHandler = () => {
     setModalOpen(true);
@@ -50,7 +61,7 @@ export default function FoodCard({ name, id }) {
         className="mb-4 relative bg-white h-13 w-full rounded-full border border-gray-500"
         onClick={modalOpenHandler}
       >
-        <div className="h-12 w-[150px] bg-gradient-to-r from-green-300 to-orange-300 rounded-full"></div>
+        <div className={`h-12 ${calculateWidth()} bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}></div>
         <div className="absolute left-4 top-0 h-12 flex items-center font-bold pb-1">
           {name}
         </div>
