@@ -21,7 +21,5 @@ export async function GET(request) {
     },
   });
 
-  console.log(response)
-
   return new Response(JSON.stringify({events: [...response]}), {status: 200})
 }

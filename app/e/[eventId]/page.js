@@ -13,15 +13,6 @@ export default async function EventDetail({ params }) {
     },
   });
 
-// temp
-  // const eventId = params.eventId;
-  // const event = {
-  //   id: "1",
-  //   datetime: new Date(),
-  //   name: "amazing",
-  //   location: "Bill's room"
-  // }
-
   return (
     <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg min-h-[600px] border border-500 ">
       {/* Head section */}

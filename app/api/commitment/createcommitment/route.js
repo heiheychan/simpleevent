@@ -7,21 +7,25 @@ const prisma = new PrismaClient();
 export async function POST(request) {
   const session = await getServerSession(authOptions);
 
-  const response = await prisma.EventsOnUsers.findMany({
+  const body = await request.json();
+  // getUserId
+
+  const user = await prisma.user.findUnique({
     where: {
-      userId: session.user.id,
+      email: session.user.email
     },
-    include: {
-      event: true,
-    },
-    orderBy: {
-      event: {
-        datetime: "asc",
-      },
+    select: {
+      id: true
+    }
+  })
+
+  const response = await prisma.commitment.create({
+    data: {
+      userId: user.id,
+      foodId: body.foodId,
+      comment: body.comment,
     },
   });
 
-  console.log(response)
-
-  return new Response(JSON.stringify({events: [...response]}), {status: 200})
+  return new Response(JSON.stringify({ success: true }), { status: 200 });
 }
