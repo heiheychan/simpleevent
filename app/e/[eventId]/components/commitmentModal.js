@@ -1,9 +1,15 @@
-"use client"
+"use client";
 
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import OneCommitment from "./oneCommitment";
 
-export default function CommitmentModal({ name, onCloseHandler, onSubmitHandler }) {
+export default function CommitmentModal({
+  name,
+  onCloseHandler,
+  onSubmitHandler,
+  commitments,
+}) {
   const [content, setContent] = useState("");
 
   return (
@@ -35,21 +41,37 @@ export default function CommitmentModal({ name, onCloseHandler, onSubmitHandler 
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="p-6">
                   <h1 className="text-2xl mb-4">
-                    Thank you for bringing{" "}
-                    <span className="underline font-bold">{name}!</span>
+                    Who is bringing the{" "}
+                    <span className="underline font-bold">{name}?</span>
                   </h1>
-                  <p className="text-gray-500 mb-2">
-                    Leave some notes about the food you are going to bring:
-                  </p>
+                  {commitments.map((commitment) => (
+                    <OneCommitment
+                      name={commitment.user.name}
+                      comment={commitment.comment}
+                      commitDate={commitment.created_at}
+                      key={commitment.id}
+                    />
+                  ))}
+                  <p className="text-gray-500 mb-2">Notes about the food:</p>
                   <textarea
                     className="h-[100px] w-full border border-gray-500 rounded-lg p-2 mb-2"
-                    placeholder="It could be about the quantity and the details about the food"
+                    placeholder="Details and quantity of the food you are bringing"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                   ></textarea>
                   <div className="flex justify-between items-center">
-                    <button className="h-12 rounded-lg bg-red-500 font-bold text-white px-4" onClick={onCloseHandler}>cancel</button>
-                    <button className="h-12 rounded-lg bg-green-500 font-bold text-white px-4" onClick={() => onSubmitHandler(content)}>I'm bringing it</button>
+                    <button
+                      className="h-12 rounded-lg bg-red-500 font-bold text-white px-4"
+                      onClick={onCloseHandler}
+                    >
+                      cancel
+                    </button>
+                    <button
+                      className="h-12 rounded-lg bg-green-500 font-bold text-white px-4"
+                      onClick={() => onSubmitHandler(content)}
+                    >
+                      I'm bringing it
+                    </button>
                   </div>
                 </div>
               </Dialog.Panel>

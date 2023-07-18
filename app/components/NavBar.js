@@ -20,12 +20,12 @@ export default function NavBar() {
               <>
                 <Link
                   href="/create-event"
-                  className="flex justify-center items-center rounded-lg bg-blue-500 h-12 px-4 font-bold text-white border-blue-500 border"
+                  className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500 mr-1"
                 >
                   Create event
                 </Link>
                 <button
-                  className="rounded-lg bg-red-500 h-12 px-4 font-bold text-white border-red-500 border ml-1"
+                  className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500"
                   onClick={() => signOut({ callbackUrl: "/" })}
                 >
                   Log out

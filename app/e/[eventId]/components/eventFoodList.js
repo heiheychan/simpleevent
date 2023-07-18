@@ -18,6 +18,7 @@ export default function EventFoodList({ eventId, maxguests }) {
       );
       setFoodList(response.data.foods);
     }
+    
     fetchData();
   }, []);
 

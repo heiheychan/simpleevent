@@ -4,75 +4,85 @@ import { useState } from "react";
 import { HiPlus } from "react-icons/hi";
 import axios from "axios";
 
-
 import CommitmentModal from "./commitmentModal";
 import FixedBanner from "@/app/components/UI/FixedBanner";
 
 export default function FoodCard({ name, id, maxguests, commitments }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([]);
 
-  const calculateWidth = () => {
-    if (commitments.length === 0) {
-      return "w-0"
-    } else {
-      console.log((commitments.length / maxguests) * 150)
-      let width = `w-[${Math.ceil((commitments.length / maxguests) * 150).toString()}px]`
-      console.log(width);
-      return width
-    }
+  const minWidth = 48;
+
+  let calculateWidth = "";
+
+  if (commitments.length === 0) {
+    calculateWidth = 0;
+  } else if (commitments.length === 1) {
+    calculateWidth = minWidth;
+  } else {
+    calculateWidth = Math.ceil(
+      ((commitments.length - 1) / (maxguests - 1)) * 150 + minWidth
+    );
   }
-
   const modalOpenHandler = () => {
     setModalOpen(true);
   };
 
   const modalCloseHandler = () => {
     setModalOpen(false);
-  }
+  };
 
   const commitmentSubmitHandler = async (content) => {
-
-    const response = await axios.post("http://localhost:3000/api/commitment/createcommitment",{
-      foodId: id,
-      comment: content
-    })
-
-    console.log(response)
+    const response = await axios.post(
+      "http://localhost:3000/api/commitment/createcommitment",
+      {
+        foodId: id,
+        comment: content,
+      }
+    );
 
     if (response.status === 200) {
       setModalOpen(false);
-      setMessages(["Thank you for bring it!"]);
+      setMessages(["Thank you for making the party AWESOME!"]);
     }
-  }
+  };
 
   return (
     <>
-      {messages.length > 0 && <FixedBanner messages={messages} setMessages={setMessages} color="bg-green-500" />}
+      {messages.length > 0 && (
+        <FixedBanner
+          messages={messages}
+          setMessages={setMessages}
+          color="bg-green-500"
+        />
+      )}
       {modalOpen && (
         <CommitmentModal
           onOpenHandler={modalOpenHandler}
           onCloseHandler={modalCloseHandler}
           name={name}
           onSubmitHandler={commitmentSubmitHandler}
+          commitments={commitments}
         />
       )}
       <div
-        className="mb-4 relative bg-white h-13 w-full rounded-full border border-gray-500"
+        className="mb-4 relative bg-white h-12 w-full rounded-full border border-gray-500"
         onClick={modalOpenHandler}
       >
-        <div className={`h-12 ${calculateWidth()} bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}></div>
+        <div
+          className={`h-[46px] bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}
+          style={{ width: calculateWidth }}
+        ></div>
         <div className="absolute left-4 top-0 h-12 flex items-center font-bold pb-1">
-          {name}
+          <p>{name}</p>
+          <div className="text-xs px-1 h-[18px] border border-gray-500 rounded-lg ml-1">{`${commitments.length}`}</div>
         </div>
         <div
-          className="absolute right-1 top-1 h-10 w-10 flex items-center justify-center rounded-full border border-gray-500"
+          className="absolute right-[2px] top-[2px] h-[41px] w-10 flex items-center justify-center rounded-full border border-gray-500"
           onClick={modalOpenHandler}
         >
           <HiPlus />
         </div>
-        {/* People */}
-        <div className="absolute h-4 w-16 left-6 -bottom-2 bg-white rounded-lg border border-gray-500"></div>
       </div>
     </>
   );

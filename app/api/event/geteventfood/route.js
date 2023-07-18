@@ -12,7 +12,11 @@ export async function POST(request) {
     include: {
       foods: {
         include: {
-          commitments: true
+          commitments: {
+            include: {
+              user: true
+            }
+          }
         }
       }
     }
