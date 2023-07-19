@@ -7,20 +7,31 @@ export async function POST(request) {
 
   const response = await prisma.event.findUnique({
     where: {
-      id: +eventId,
+      id: eventId,
     },
-    include: {
+    select: {
       foods: {
-        include: {
+        select: {
+          id: true,
+          name: true,
           commitments: {
-            include: {
-              user: true
+            select: {
+              id: true,
+              comment: true,
+              created_at: true,
+              user: {
+                select: {
+                  name: true
+                }
+              }
             }
           }
         }
       }
     }
   });
+
+  await prisma.$disconnect()
 
   return new Response(JSON.stringify({ foods: [...response.foods] }), {
     status: 200,

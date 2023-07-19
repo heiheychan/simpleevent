@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
-export default function NavBar() {
+export default function NavBar({ session }) {
+
   const { status } = useSession();
 
   return (
@@ -14,26 +15,30 @@ export default function NavBar() {
             S.
           </div>
         </Link>
-        <div className="h-full">
-          <div className="h-full flex flex-row items-center">
-            {status !== "loading" && (
-              <>
-                <Link
-                  href="/create-event"
-                  className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500 mr-1"
-                >
-                  Create event
-                </Link>
-                <button
-                  className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500"
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                >
-                  Log out
-                </button>
-              </>
-            )}
+        {session?.user ? (
+          <div className="h-full">
+            <div className="h-full flex flex-row items-center">
+              {status !== "loading" && session?.user && (
+                <>
+                  <Link
+                    href="/create-event"
+                    className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500 mr-1"
+                  >
+                    Create event
+                  </Link>
+                  <button
+                    className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500"
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                  >
+                    Log out
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
       </nav>
     </div>
   );

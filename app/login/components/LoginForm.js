@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { getCookie, deleteCookie, hasCookie } from "cookies-next";
 
 import Button from "@/app/components/UI/Button";
 import FixedBanner from "@/app/components/UI/FixedBanner";
@@ -18,10 +19,17 @@ export default function LoginForm({ email }) {
 
   const onClickHandler = (e) => {
     e.preventDefault();
+    let callbackUrl = '/dashboard';
+
+    if (hasCookie('return_path')) {
+      callbackUrl = getCookie('return_path');
+      deleteCookie('return_path');
+    }
+
     signIn("credentials", {
       email,
       password: enteredPassword,
-      callbackUrl: '/dashboard'
+      callbackUrl
     });
   }
 

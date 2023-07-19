@@ -10,7 +10,7 @@ export default function EventFoodList({ eventId, maxguests }) {
 
   async function fetchFoodList() {
     const response = await axios.post(
-      "http://localhost:3000/api/event/geteventfood",
+      "/api/event/geteventfood",
       {
         eventId,
       }

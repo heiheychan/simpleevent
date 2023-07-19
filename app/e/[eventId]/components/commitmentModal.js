@@ -89,6 +89,7 @@ export default function CommitmentModal({
                         className="h-12 rounded-full border border-gray-500 font-bold px-4"
                         onClick={() => {
                           onSubmitHandler(content);
+                          scrollToBottom();
                           setContent("");
                         }}
                       >

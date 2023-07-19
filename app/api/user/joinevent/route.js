@@ -5,29 +5,28 @@ import { authOptions } from "@/lib/auth";
 const prisma = new PrismaClient();
 
 export async function POST(request) {
-  const session = await getServerSession(authOptions);
-
   const body = await request.json();
-  // getUserId
+  const session = await getServerSession(authOptions);
+  const { eventId, host } = body;
+
+  console.log(eventId);
 
   const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email
-    },
     select: {
-      id: true
-    }
-  })
-
-  const response = await prisma.commitment.create({
-    data: {
-      userId: user.id,
-      foodId: body.foodId,
-      comment: body.comment,
+      id: true,
+    },
+    where: {
+      email: session.user.email,
     },
   });
 
-  await prisma.$disconnect()
+  await prisma.eventsOnUsers.create({
+    data: {
+      eventId: eventId,
+      userId: user.id,
+      host: host,
+    },
+  });
 
-  return new Response(JSON.stringify({ success: true }), { status: 200 });
+  return new Response(JSON.stringify({ message: "success" }), { status: 200 });
 }

@@ -1,6 +1,4 @@
 export default function SelectPicker({ label, options }) {
-  console.log(options);
-
   return (
     <div className="w-full my-2">
       <p className="w-full font-bold">{label}</p>

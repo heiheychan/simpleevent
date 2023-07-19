@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
+import ShortUniqueId from "short-unique-id";
 
 const prisma = new PrismaClient();
 
@@ -9,12 +10,15 @@ export async function POST(request) {
   const session = await getServerSession(authOptions);
   const userEmail = session.user.email;
 
+  const uid = new ShortUniqueId({ length: 6 });
+
   const createdEvent = await prisma.event.create({
     data: {
       name: body.name,
       datetime: new Date(body.eventdatetime),
       maxguests: +body.numguest,
       location: body.location,
+      id: uid(),
       users: {
         create: [
           {
@@ -37,6 +41,8 @@ export async function POST(request) {
   await prisma.food.createMany({
     data: readyFoodList,
   });
+
+  await prisma.$disconnect()
 
   return new Response(JSON.stringify({ success: true }), { status: 200 });
 }

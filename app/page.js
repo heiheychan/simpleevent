@@ -15,7 +15,6 @@ export default async function Home() {
 
   return (
     <>
-      {/* HEADER SECTION */}
       <HomeHeader />
       <HomeForm />
       <Footer />

@@ -28,7 +28,7 @@ export default function CopyButton({ name, id }) {
       <CopyToClipboard
         text={`
           You are invited to ${name}!
-          Join on Simple event: http://localhost:3000/e/${id}
+          Join on Simple event: ${process.env.BASE_URL}/e/${id}
           `}
       >
         <button

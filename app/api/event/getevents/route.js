@@ -7,11 +7,21 @@ const prisma = new PrismaClient();
 export async function GET(request) {
   const session = await getServerSession(authOptions);
 
+  const user = await prisma.user.findUnique({
+    select: {
+      id: true,
+    },
+    where: {
+      email: session.user.email,
+    },
+  });
+
   const response = await prisma.EventsOnUsers.findMany({
     where: {
-      userId: session.user.id,
+      userId: user.id,
     },
-    include: {
+    select: {
+      host: true,
       event: true,
     },
     orderBy: {
@@ -21,5 +31,11 @@ export async function GET(request) {
     },
   });
 
-  return new Response(JSON.stringify({events: [...response]}), {status: 200})
+  console.log(response);
+
+  await prisma.$disconnect();
+
+  return new Response(JSON.stringify({ events: [...response] }), {
+    status: 200,
+  });
 }

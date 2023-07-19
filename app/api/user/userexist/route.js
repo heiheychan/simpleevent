@@ -19,6 +19,8 @@ export async function POST(request) {
     );
   }
 
+  await prisma.$disconnect()
+
   return new Response(
     JSON.stringify({
       user: false

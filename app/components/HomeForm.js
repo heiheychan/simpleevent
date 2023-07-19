@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { setCookie } from 'cookies-next';
 import validator from "validator";
 import axios from "axios";
@@ -14,6 +14,12 @@ export default function HomeForm() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState([]);
   const router = useRouter();
+
+  const path = usePathname();
+
+  if (path.startsWith("/e/")) {
+    setCookie('return_path', path);
+  }
 
   const setEmailHandler = (e) => {
     setEmail(e.target.value);
@@ -28,7 +34,7 @@ export default function HomeForm() {
     }
 
     const response = await axios.post(
-      "http://localhost:3000/api/user/userexist",
+      "/api/user/userexist",
       {
         email,
       }

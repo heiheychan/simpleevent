@@ -14,7 +14,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       const events = await axios.get(
-        "http://localhost:3000/api/event/getevents"
+        "/api/event/getevents"
       );
       setEvents(events.data.events);
     };
@@ -48,7 +48,7 @@ export default function Dashboard() {
             setComingEvents(true);
           }}
         >
-          Coming events
+          Upcoming events
         </h1>
         /
         <h1
@@ -77,6 +77,7 @@ export default function Dashboard() {
               location={ele.event.location}
               datetime={ele.event.datetime}
               host={ele.host}
+              joined={true}
             />
           </Link>
         ))}

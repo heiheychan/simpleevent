@@ -122,20 +122,6 @@ export default function CreateEvent() {
     setFoodList(newfl);
   };
 
-  // It's dangerous to have useState inside useEffect
-  // useEffect(() => {
-  //   if (errors.length === 0) {
-  //     return;
-  //   }
-  //   const timeoutObject = setTimeout(() => {
-  //     setErrors([]);
-  //   }, 2000);
-
-  //   return () => {
-  //     clearTimeout(timeoutObject);
-  //   };
-  // }, [errors]);
-
   const formSubmission = async () => {
     setErrors([]);
     let tempError = [];
@@ -157,7 +143,7 @@ export default function CreateEvent() {
     // Add order value to the food list
     processFoodList(foodList);
 
-    const response = await axios.post("http://localhost:3000/api/event/createevent", {
+    const response = await axios.post("/api/event/createevent", {
       name: enteredName,
       eventdatetime: enteredDatetime,
       location: enteredLocation,

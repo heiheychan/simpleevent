@@ -35,7 +35,7 @@ export default function FoodCard({ name, id, maxguests, commitments, fetchFoodLi
 
   const commitmentSubmitHandler = async (content) => {
     const response = await axios.post(
-      "http://localhost:3000/api/commitment/createcommitment",
+      "/api/commitment/createcommitment",
       {
         foodId: id,
         comment: content,

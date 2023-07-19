@@ -3,6 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { hasCookie, getCookie, deleteCookie } from "cookies-next";
 
 import Button from "@/app/components/UI/Button";
 import FixedBanner from "@/app/components/UI/FixedBanner";
@@ -30,7 +31,7 @@ export default function SignupForm({ email }) {
   const onClickHandler = async (e) => {
     e.preventDefault();
     const response = await axios
-      .post("http://localhost:3000/api/user/signup", {
+      .post("/api/user/signup", {
         email,
         password: enteredPassword,
         name: enteredName,
@@ -38,7 +39,20 @@ export default function SignupForm({ email }) {
       .catch((error) => {
         router.push("/");
       });
-    
+
+    let callbackUrl = "/dashboard";
+
+    if (hasCookie("return_path")) {
+      callbackUrl = getCookie("return_path");
+      deleteCookie('return_path');
+    }
+
+    signIn("credentials", {
+      email,
+      password: enteredPassword,
+      callbackUrl,
+    });
+
     // Sign the user in
     signIn("credentials", {
       email,
@@ -49,9 +63,7 @@ export default function SignupForm({ email }) {
 
   return (
     <div className="w-full flex flex-col max-w-[400px] mt-6">
-      {error.length > 0 && (
-        <FixedBanner color="bg-red-500" messages={error} />
-      )}
+      {error.length > 0 && <FixedBanner color="bg-red-500" messages={error} />}
       <TextInput
         placeholder="example@example.com"
         label="Email address*"
@@ -75,7 +87,11 @@ export default function SignupForm({ email }) {
         setValue={enteredPasswordHandler}
         subtextcolor={passwordLevel.color}
       />
-      <Button content="Sign up" onClickHandler={onClickHandler} bgcolor="bg-red-500" />
+      <Button
+        content="Sign up"
+        onClickHandler={onClickHandler}
+        bgcolor="bg-red-500"
+      />
     </div>
   );
 }

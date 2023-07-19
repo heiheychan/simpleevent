@@ -8,7 +8,6 @@ export async function POST(request) {
   const { email, password, name } = body;
 
   // validate the inputs
-
   const userWithEmail = await prisma.user.findUnique({
     where: {
       email,
@@ -33,6 +32,8 @@ export async function POST(request) {
       name
     },
   });
+
+  await prisma.$disconnect()
 
   return new Response(JSON.stringify({ email: user.email }), { status: 200 });
 }
