@@ -8,18 +8,18 @@ import FoodCard from "./foodCard";
 export default function EventFoodList({ eventId, maxguests }) {
   const [foodList, setFoodList] = useState([]);
 
+  async function fetchFoodList() {
+    const response = await axios.post(
+      "http://localhost:3000/api/event/geteventfood",
+      {
+        eventId,
+      }
+    );
+    setFoodList(response.data.foods);
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const response = await axios.post(
-        "http://localhost:3000/api/event/geteventfood",
-        {
-          eventId,
-        }
-      );
-      setFoodList(response.data.foods);
-    }
-    
-    fetchData();
+    fetchFoodList();
   }, []);
 
 
@@ -38,6 +38,7 @@ export default function EventFoodList({ eventId, maxguests }) {
               name={food.name}
               maxguests={maxguests}
               commitments={food.commitments}
+              fetchFoodList={fetchFoodList}
             />
           );
         })}

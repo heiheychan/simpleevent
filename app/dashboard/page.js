@@ -41,7 +41,9 @@ export default function Dashboard() {
     <div className="w-full max-w-[400px] flex flex-col">
       <div className="flex flex-row items-center mb-2">
         <h1
-          className={`mr-1 text-2xl font-bold ${comingEvents ? "underline" : "text-gray-300"}`}
+          className={`mr-1 text-2xl font-bold ${
+            comingEvents ? "underline" : "text-gray-300"
+          }`}
           onClick={() => {
             setComingEvents(true);
           }}
@@ -50,7 +52,9 @@ export default function Dashboard() {
         </h1>
         /
         <h1
-          className={`ml-1 text-2xl font-bold ${!comingEvents ? "underline" : "text-gray-300"}`}
+          className={`ml-1 text-2xl font-bold ${
+            !comingEvents ? "underline" : "text-gray-300"
+          }`}
           onClick={() => {
             setComingEvents(false);
           }}
@@ -62,7 +66,9 @@ export default function Dashboard() {
         {displayEvents.map((ele) => (
           <Link
             href={`/e/${ele.event.id}`}
-            className="py-4 w-full rounded-lg mb-2 px-6 flex flex-col justify-center border border-gray-500 cursor-pointer"
+            className={`py-4 w-full rounded-lg mb-2 px-6 flex flex-col justify-center border border-gray-500 cursor-pointer ${
+              comingEvents ? "" : "pointer-events-none bg-gray-50"
+            }`}
           >
             <EventCard
               key={ele.event.id}

@@ -14,7 +14,7 @@ export default async function EventDetail({ params }) {
   });
 
   return (
-    <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg min-h-[600px] border border-500 ">
+    <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg min-h-[600px] border border-gray-500 ">
       {/* Head section */}
       <div className="mb-4">
         <EventCard

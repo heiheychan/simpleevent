@@ -11,17 +11,17 @@ export default function OneCommitment({ name, comment, commitDate }) {
   TimeAgo.addLocale(en);
 
   return (
-    <div className="w-full border-l-2 border-l-gray-500 flex flex-row justify-between p-4 pt-0 relative">
+    <div className="w-full border-l-2 border-l-gray-500 flex flex-row justify-between items-start p-4 pt-0 relative">
       <div className="flex flex-col items-start w-4/5 pl-2">
         <p className="pb-2">
           <span className="font-bold text-gray-500">{name}</span> is bringing
-          this and commented:
+          it and commented:
         </p>
         <div className="px-6 py-4 border-gray-300 border rounded-lg">
           {comment}
         </div>
       </div>
-      <div className="w-1/5 text-gray-500 text-xs">
+      <div className="w-1/5 text-gray-500 text-xs pt-1">
         <ReactTimeAgo date={commitDate} locale="en-US" />
       </div>
       <div className="h-[25px] w-[25px] rounded-full bg-white absolute -left-[13px] flex justify-center items-center">

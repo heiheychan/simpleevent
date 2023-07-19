@@ -7,7 +7,7 @@ import axios from "axios";
 import CommitmentModal from "./commitmentModal";
 import FixedBanner from "@/app/components/UI/FixedBanner";
 
-export default function FoodCard({ name, id, maxguests, commitments }) {
+export default function FoodCard({ name, id, maxguests, commitments, fetchFoodList }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [messages, setMessages] = useState([]);
 
@@ -29,6 +29,7 @@ export default function FoodCard({ name, id, maxguests, commitments }) {
   };
 
   const modalCloseHandler = () => {
+    fetchFoodList();
     setModalOpen(false);
   };
 
@@ -42,7 +43,7 @@ export default function FoodCard({ name, id, maxguests, commitments }) {
     );
 
     if (response.status === 200) {
-      setModalOpen(false);
+      fetchFoodList();
       setMessages(["Thank you for making the party AWESOME!"]);
     }
   };
@@ -66,16 +67,16 @@ export default function FoodCard({ name, id, maxguests, commitments }) {
         />
       )}
       <div
-        className="mb-4 relative bg-white h-12 w-full rounded-full border border-gray-500"
+        className="mb-4 relative bg-white h-[48px] w-full rounded-full border border-gray-500"
         onClick={modalOpenHandler}
       >
         <div
-          className={`h-[46px] bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}
+          className={`h-[47px] bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}
           style={{ width: calculateWidth }}
         ></div>
         <div className="absolute left-4 top-0 h-12 flex items-center font-bold pb-1">
           <p>{name}</p>
-          <div className="text-xs px-1 h-[18px] border border-gray-500 rounded-lg ml-1">{`${commitments.length}`}</div>
+          <div className="text-xs px-1 h-[18px] border border-gray-500 bg-white rounded-lg ml-1">{`${commitments.length}`}</div>
         </div>
         <div
           className="absolute right-[2px] top-[2px] h-[41px] w-10 flex items-center justify-center rounded-full border border-gray-500"
