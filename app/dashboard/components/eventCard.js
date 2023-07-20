@@ -30,7 +30,7 @@ export default function EventCard({
       {host && (
         <div className="h-[18px] rounded-full bg-yellow-300 text-xs flex justify-center items-center w-32 ">
           <PiCrownSimpleBold className="mr-1" />
-          you're the host
+          you{`&apos;`}re the host
         </div>
       )}
       <div className="flex flex-row justify-between">

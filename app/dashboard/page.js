@@ -13,9 +13,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const events = await axios.get(
-        "/api/event/getevents"
-      );
+      const events = await axios.get("/api/event/getevents");
       setEvents(events.data.events);
     };
     fetchData();
@@ -65,6 +63,7 @@ export default function Dashboard() {
       <div className="py-2">
         {displayEvents.map((ele) => (
           <Link
+            key={ele.event.id}
             href={`/e/${ele.event.id}`}
             className={`py-4 w-full rounded-lg mb-2 px-6 flex flex-col justify-center border border-gray-500 cursor-pointer ${
               comingEvents ? "" : "pointer-events-none bg-gray-50"

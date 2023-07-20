@@ -9,19 +9,13 @@ export default function EventFoodList({ eventId, maxguests }) {
   const [foodList, setFoodList] = useState([]);
 
   async function fetchFoodList() {
-    const response = await axios.post(
-      "/api/event/geteventfood",
-      {
-        eventId,
-      }
-    );
+    const response = await axios.post("/api/event/geteventfood", {
+      eventId,
+    });
     setFoodList(response.data.foods);
   }
 
-  useEffect(() => {
-    fetchFoodList();
-  }, []);
-
+  fetchFoodList();
 
   return (
     <>
