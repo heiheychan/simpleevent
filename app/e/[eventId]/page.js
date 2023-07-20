@@ -4,7 +4,7 @@ import EventFoodList from "./components/eventFoodList";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import HomeForm from "@/app/components/HomeForm";
-import { BiSolidDrink } from "react-icons/bi";
+import { LiaCocktailSolid, LiaCookieBiteSolid } from "react-icons/lia";
 import JoinEvent from "./components/joinEvent";
 
 export default async function EventDetail({ params }) {
@@ -35,10 +35,19 @@ export default async function EventDetail({ params }) {
     },
   });
 
-  const filteredUser = event.users.filter((ele) => {
-    return ele.user.email === session?.user.email;
-  });
-  const joined = filteredUser.length > 0;
+  let joined;
+
+  if (event !== null) {
+    const filteredUser = event.users.filter((ele) => {
+      return ele.user.email === session?.user.email;
+    });
+
+    joined = filteredUser.length > 0;
+  } else {
+    return <div>Event not found</div>
+  }
+   
+  
 
   const eventDetails = (
     <>
@@ -62,7 +71,7 @@ export default async function EventDetail({ params }) {
   );
 
   const homeForm = (
-    <div className="min-h-[600px] py-4 flex flex-col justify-between items-center">
+    <div className="min-h-[330px] py-4 flex flex-col justify-between items-center">
       <div className="w-full">
         <h1 className="mb-4 text-2xl">
           You&apos;re invited to{" "}
@@ -72,12 +81,16 @@ export default async function EventDetail({ params }) {
         </h1>
         <HomeForm />
       </div>
-      <BiSolidDrink size={30} />
+      <div className="flex">
+      <LiaCocktailSolid size={30} />
+      <LiaCookieBiteSolid size={30} />
+      </div>
+      
     </div>
   );
 
   return (
-    <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg h-[660px] border border-gray-500 ">
+    <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg max-h-[660px] border border-gray-500 ">
       {session?.user ? eventDetails : homeForm}
     </div>
   );
