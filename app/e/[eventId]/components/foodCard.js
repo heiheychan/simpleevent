@@ -67,7 +67,7 @@ export default function FoodCard({ name, id, maxguests, commitments, fetchFoodLi
         />
       )}
       <div
-        className="mb-4 relative bg-white h-[48px] w-full rounded-full border border-gray-500"
+        className="mb-3 relative bg-white h-[48px] w-full rounded-full border border-gray-500"
         onClick={modalOpenHandler}
       >
         <div

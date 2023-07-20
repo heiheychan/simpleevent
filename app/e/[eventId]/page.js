@@ -22,7 +22,8 @@ export default async function EventDetail({ params }) {
       location: true,
       maxguests: true,
       users: {
-        include: {
+        select: {
+          host: true,
           user: {
             select: {
               name: true,
@@ -76,7 +77,7 @@ export default async function EventDetail({ params }) {
   );
 
   return (
-    <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg min-h-[600px] border border-gray-500 ">
+    <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg h-[660px] border border-gray-500 ">
       {session?.user ? eventDetails : homeForm}
     </div>
   );

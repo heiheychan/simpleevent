@@ -29,7 +29,7 @@ export default function HomeForm() {
     e.preventDefault();
 
     if (!validator.isEmail(email)) {
-      setError(["Email cannot be empty"]);
+      setError(["Email is not valid"]);
       return;
     }
 

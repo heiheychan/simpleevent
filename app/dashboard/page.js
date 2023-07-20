@@ -5,16 +5,20 @@ import axios from "axios";
 import EventCard from "./components/eventCard";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CgSpinner } from "react-icons/cg";
 
 export default function Dashboard() {
   const [comingEvents, setComingEvents] = useState(true);
   const [events, setEvents] = useState([]);
   const [displayEvents, setDisplayEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       const events = await axios.get("/api/event/getevents");
       setEvents(events.data.events);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -33,6 +37,7 @@ export default function Dashboard() {
     }
 
     setDisplayEvents(result);
+    
   }, [comingEvents, events]);
 
   return (
@@ -60,7 +65,8 @@ export default function Dashboard() {
           Past events
         </h1>
       </div>
-      <div className="py-2">
+      <div className="py-2 flex justify-center">
+        {loading && <CgSpinner className="animate-spin mt-6" size={30} />}
         {displayEvents.map((ele) => (
           <Link
             key={ele.event.id}
