@@ -1,13 +1,11 @@
 import EventCard from "@/app/dashboard/components/eventCard";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db";
 import EventFoodList from "./components/eventFoodList";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import HomeForm from "@/app/components/HomeForm";
 import { BiSolidDrink } from "react-icons/bi";
 import JoinEvent from "./components/joinEvent";
-
-const prisma = new PrismaClient();
 
 export default async function EventDetail({ params }) {
   const eventId = params.eventId;

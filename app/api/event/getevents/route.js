@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-
-const prisma = new PrismaClient();
 
 export async function GET(request) {
   const session = await getServerSession(authOptions);
@@ -30,8 +28,6 @@ export async function GET(request) {
       },
     },
   });
-
-  console.log(response);
 
   await prisma.$disconnect();
 
