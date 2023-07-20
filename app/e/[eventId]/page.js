@@ -64,7 +64,7 @@ export default async function EventDetail({ params }) {
     <div className="min-h-[600px] py-4 flex flex-col justify-between items-center">
       <div className="w-full">
         <h1 className="mb-4 text-2xl">
-          You{`&apos;`}re invited to{" "}
+          You&apos;re invited to{" "}
           <span className="font-serif font-light underline italic">
             {event.name}
           </span>

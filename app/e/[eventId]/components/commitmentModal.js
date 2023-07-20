@@ -93,7 +93,7 @@ export default function CommitmentModal({
                           setContent("");
                         }}
                       >
-                        I{`&apos;`}m bringing it
+                        I&apos;m bringing it
                       </button>
                     </div>
                   </div>
