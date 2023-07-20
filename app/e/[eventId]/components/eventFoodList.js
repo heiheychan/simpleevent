@@ -15,8 +15,11 @@ export default function EventFoodList({ eventId, maxguests }) {
     setFoodList(response.data.foods);
   }
 
-  fetchFoodList();
+  useEffect(() => {
+    fetchFoodList()
+  },[fetchFoodList])
 
+ 
   return (
     <>
       <div className="w-full h-[500px] bg-white border border-gray-500 rounded-lg flex flex-col p-4 overflow-scroll">
