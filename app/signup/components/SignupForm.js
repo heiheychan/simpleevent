@@ -30,7 +30,7 @@ export default function SignupForm({ email }) {
 
   const onClickHandler = async (e) => {
     e.preventDefault();
-    const response = await axios
+    await axios
       .post("/api/user/signup", {
         email: email.toLowerCase(),
         password: enteredPassword,
@@ -44,20 +44,13 @@ export default function SignupForm({ email }) {
 
     if (hasCookie("return_path")) {
       callbackUrl = getCookie("return_path");
-      deleteCookie('return_path');
+      deleteCookie("return_path");
     }
 
     signIn("credentials", {
       email,
       password: enteredPassword,
       callbackUrl,
-    });
-
-    // Sign the user in
-    signIn("credentials", {
-      email,
-      password: enteredPassword,
-      callbackUrl: "/dashboard",
     });
   };
 
