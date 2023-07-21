@@ -36,11 +36,11 @@ export default function HomeForm() {
     const response = await axios.post(
       "/api/user/userexist",
       {
-        email,
+        email: email.toLowerCase(),
       }
     );
 
-    setCookie('email', email);
+    setCookie('email', email.toLowerCase());
 
     if (response.data.user) {
       router.push("/login");

@@ -32,7 +32,7 @@ export default function SignupForm({ email }) {
     e.preventDefault();
     const response = await axios
       .post("/api/user/signup", {
-        email,
+        email: email.toLowerCase(),
         password: enteredPassword,
         name: enteredName,
       })

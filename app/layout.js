@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
       </Head>
       <body suppressHydrationWarning={true}>
         <NextAuthProvider>
-          {url.pathname === "/" ? null : <NavBar session={session} />}
+          <NavBar session={session} />
           <main className="flex flex-col items-center pt-6 sm:pt-12 px-4">
             {children}
           </main>

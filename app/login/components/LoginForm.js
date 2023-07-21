@@ -27,7 +27,7 @@ export default function LoginForm({ email }) {
     }
 
     signIn("credentials", {
-      email,
+      email: email.toLowerCase(),
       password: enteredPassword,
       callbackUrl
     });
