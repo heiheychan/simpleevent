@@ -17,15 +17,13 @@ export async function POST(request) {
     }
   })
 
-  const response = await prisma.commitment.create({
+  await prisma.commitment.create({
     data: {
       userId: user.id,
       foodId: body.foodId,
       comment: body.comment,
     },
   });
-
-  await prisma.$disconnect()
 
   return new Response(JSON.stringify({ success: true }), { status: 200 });
 }

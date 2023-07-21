@@ -5,12 +5,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import OneCommitment from "./oneCommitment";
 
 export default function CommitmentModal({
-  name,
-  onCloseHandler,
-  onSubmitHandler,
   commitments,
+  onCloseHandler,
+  onSubmitHandler
 }) {
   const [content, setContent] = useState("");
+
   const commitmentEndRef = useRef();
 
   const scrollToBottom = (delay) => {
@@ -89,7 +89,6 @@ export default function CommitmentModal({
                         className="h-12 rounded-full border border-gray-500 font-bold px-4"
                         onClick={() => {
                           onSubmitHandler(content);
-                          scrollToBottom(1000);
                           setContent("");
                         }}
                       >

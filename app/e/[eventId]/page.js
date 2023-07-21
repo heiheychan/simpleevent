@@ -11,6 +11,7 @@ export default async function EventDetail({ params }) {
   const eventId = params.eventId;
   const session = await getServerSession(authOptions);
 
+  console.time();
   const event = await prisma.event.findUnique({
     where: {
       id: eventId,
@@ -20,34 +21,25 @@ export default async function EventDetail({ params }) {
       datetime: true,
       name: true,
       location: true,
-      maxguests: true,
-      users: {
-        select: {
-          host: true,
-          user: {
-            select: {
-              name: true,
-              email: true,
-            },
-          },
-        },
+      maxguests: true
+    },
+  });  
+  console.timeEnd();
+
+  if (event !== null) <div>Event not found</div>;
+
+  let joined;
+
+  const record = await prisma.EventsOnUsers.findMany({
+    where: {
+      eventId: eventId,
+      user: {
+        email: session?.user.email,
       },
     },
   });
 
-  let joined;
-
-  if (event !== null) {
-    const filteredUser = event.users.filter((ele) => {
-      return ele.user.email === session?.user.email;
-    });
-
-    joined = filteredUser.length > 0;
-  } else {
-    return <div>Event not found</div>
-  }
-   
-  
+  record.length > 0 ? joined = true : joined = false;
 
   const eventDetails = (
     <>
@@ -82,10 +74,9 @@ export default async function EventDetail({ params }) {
         <HomeForm />
       </div>
       <div className="flex">
-      <LiaCocktailSolid size={30} />
-      <LiaCookieBiteSolid size={30} />
+        <LiaCocktailSolid size={30} />
+        <LiaCookieBiteSolid size={30} />
       </div>
-      
     </div>
   );
 

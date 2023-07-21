@@ -31,8 +31,6 @@ export async function POST(request) {
     },
   });
 
-  await prisma.$disconnect()
-
   return new Response(JSON.stringify({ email: user.email }), { status: 200 });
 }
 

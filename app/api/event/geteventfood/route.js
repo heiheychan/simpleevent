@@ -11,25 +11,11 @@ export async function POST(request) {
       foods: {
         select: {
           id: true,
-          name: true,
-          commitments: {
-            select: {
-              id: true,
-              comment: true,
-              created_at: true,
-              user: {
-                select: {
-                  name: true
-                }
-              }
-            }
-          }
+          name: true
         }
       }
     }
   });
-
-  await prisma.$disconnect()
 
   return new Response(JSON.stringify({ foods: [...response.foods] }), {
     status: 200,

@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { PiBowlFoodFill } from "react-icons/pi";
 import { CgSpinner } from "react-icons/cg";
 import FoodCard from "./foodCard";
+import FixedBanner from "@/app/components/UI/FixedBanner";
 
 export default function EventFoodList({ eventId, maxguests }) {
   const [foodList, setFoodList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   async function fetchFoodList() {
     setLoading(true);
@@ -25,6 +27,13 @@ export default function EventFoodList({ eventId, maxguests }) {
 
   return (
     <>
+      {messages.length > 0 && (
+        <FixedBanner
+          messages={messages}
+          setMessages={setMessages}
+          color="bg-green-500"
+        />
+      )}
       <div className="w-full h-[500px] bg-white border border-gray-500 rounded-lg flex flex-col p-4 overflow-scroll">
         <p className="text-gray-500 text-sm mb-2 flex flex-row items-center">
           <PiBowlFoodFill size={12} className="mr-1" />
@@ -42,8 +51,7 @@ export default function EventFoodList({ eventId, maxguests }) {
                 key={food.id}
                 name={food.name}
                 maxguests={maxguests}
-                commitments={food.commitments}
-                fetchFoodList={fetchFoodList}
+                setMessages={setMessages}
               />
             );
           })

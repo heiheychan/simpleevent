@@ -40,8 +40,6 @@ export async function POST(request) {
     data: readyFoodList,
   });
 
-  await prisma.$disconnect()
-
   return new Response(JSON.stringify({ success: true }), { status: 200 });
 }
 

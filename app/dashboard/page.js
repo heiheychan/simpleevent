@@ -65,7 +65,7 @@ export default function Dashboard() {
           Past events
         </h1>
       </div>
-      <div className="py-2 flex justify-center">
+      <div className="py-2 flex flex-col justify-center items-center">
         {loading && <CgSpinner className="animate-spin mt-6" size={30} />}
         {displayEvents.map((ele) => (
           <Link

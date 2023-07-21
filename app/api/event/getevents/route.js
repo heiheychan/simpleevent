@@ -29,8 +29,6 @@ export async function GET(request) {
     },
   });
 
-  await prisma.$disconnect();
-
   return new Response(JSON.stringify({ events: [...response] }), {
     status: 200,
   });

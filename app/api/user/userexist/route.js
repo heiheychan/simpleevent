@@ -11,17 +11,15 @@ export async function POST(request) {
   if (user) {
     return new Response(
       JSON.stringify({
-        user: true
+        user: true,
       }),
       { status: 200 }
     );
   }
 
-  await prisma.$disconnect()
-
   return new Response(
     JSON.stringify({
-      user: false
+      user: false,
     }),
     { status: 200 }
   );
