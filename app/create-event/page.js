@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import validator from "validator";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 import Button from "@/app/components/UI/Button";
 import DatetimePicker from "@/app/components/UI/DatetimePicker";
@@ -148,8 +148,8 @@ export default function CreateEvent() {
       eventdatetime: enteredDatetime,
       location: enteredLocation,
       numguest: enteredNumGuest,
-      foodlist: [...foodList]
-    })
+      foodlist: [...foodList],
+    });
 
     if (response.status === 200) {
       router.push("/dashboard");
@@ -158,8 +158,8 @@ export default function CreateEvent() {
 
   // Page 1 content
   const page1 = (
-    <>
-      <div className="w-full max-w-[400px]">
+    <div className="min-h-[330px] border p-10 rounded-lg border-gray-500">
+      <div className="w-[400px]">
         <h1 className="text-2xl font-bold mb-3">Create an event</h1>
         <p className="text-gray-500">
           Please fill in your event info{" "}
@@ -201,60 +201,66 @@ export default function CreateEvent() {
           bgcolor="bg-red-500"
         />
       </div>
-    </>
+    </div>
   );
 
   // Page 2
   const page2 = (
-    <>
-      {errors.length > 1 && (
-        <FixedBanner messages={errors} color="bg-red-500" setMessages={setErrors}/>
-      )}
-      <div className="w-full max-w-[400px]">
-        <h1 className="text-2xl font-bold mb-3">What to bring?</h1>
-        <p className="text-gray-500">
-          Please add the food you want your guests to bring
-        </p>
+    <div className="min-h-[330px] border p-10 rounded-lg border-gray-500">
+      <div className="w-[400px]  flex flex-col justify-center items-center">
+        {errors.length > 1 && (
+          <FixedBanner
+            messages={errors}
+            color="bg-red-500"
+            setMessages={setErrors}
+          />
+        )}
+        <div className="w-full max-w-[400px]">
+          <h1 className="text-2xl font-bold mb-3">What to bring?</h1>
+          <p className="text-gray-500">
+            Please add the food you want your guests to bring
+          </p>
+        </div>
+        <div className="w-full flex flex-col max-w-[400px] mt-6">
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="foodList">
+              {(provided) => (
+                <section {...provided.droppableProps} ref={provided.innerRef}>
+                  {foodList.map((food, index) => (
+                    <Draggable
+                      key={food.id}
+                      draggableId={food.id.toString()}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <OneFood
+                          food={food.name}
+                          id={food.id}
+                          innerRef={provided.innerRef}
+                          provided={provided}
+                          setValue={setFoodListHandler}
+                          removeValue={removeFoodHandler}
+                        />
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </section>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
+        <AddFoodButton addFoodHandler={addFoodHandler} />
+        <Button
+          content="Create event"
+          bgcolor="bg-red-500"
+          onClickHandler={formSubmission}
+        />
+        <button onClick={switchPageHandler} className="mt-2 underline">
+          Back
+        </button>
       </div>
-      <div className="w-full flex flex-col max-w-[400px] mt-6">
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="foodList">
-            {(provided) => (
-              <section {...provided.droppableProps} ref={provided.innerRef}>
-                {foodList.map((food, index) => (
-                  <Draggable
-                    key={food.id}
-                    draggableId={food.id.toString()}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <OneFood
-                        food={food.name}
-                        id={food.id}
-                        innerRef={provided.innerRef}
-                        provided={provided}
-                        setValue={setFoodListHandler}
-                        removeValue={removeFoodHandler}
-                      />
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </section>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </div>
-      <AddFoodButton addFoodHandler={addFoodHandler} />
-      <Button
-        content="Create event"
-        bgcolor="bg-red-500"
-        onClickHandler={formSubmission}
-      />
-      <button onClick={switchPageHandler} className="mt-2 underline">
-        Back
-      </button>
-    </>
+    </div>
   );
 
   if (firstPage === true) {

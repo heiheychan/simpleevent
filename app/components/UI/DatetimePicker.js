@@ -8,7 +8,7 @@ export default function DatetimePicker({ value, setValue}) {
       <input
         value={value}
         type="datetime-local"
-        className="w-full px-3 h-12 border border-gray-300 rounded-lg my-1 mb-1 outline-none"
+        className="w-full px-3 h-12 border border-gray-500 rounded-lg my-1 mb-1 outline-none"
         onChange={setValue}
       />
     </div>
