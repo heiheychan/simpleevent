@@ -36,7 +36,10 @@ export default function FoodCard({ name, id, maxguests, setMessages }) {
       setCalculatedWidth(minWidth);
     } else {
       setCalculatedWidth(
-        Math.ceil(((commitments.length - 1) / (maxguests - 1)) * 150 + minWidth)
+        Math.ceil(
+          ((commitments.length - 1) / (maxguests - 1)) * (150 * 2 / 3) +
+            minWidth
+        )
       );
     }
   }, [commitments.length]);
@@ -63,7 +66,6 @@ export default function FoodCard({ name, id, maxguests, setMessages }) {
   };
 
   const doubleClickEventHandler = (e) => {
-    e.stopPropagation();
     if (e.detail === 2) {
       commitmentSubmitHandler("");
     }

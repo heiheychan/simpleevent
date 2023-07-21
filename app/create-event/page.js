@@ -158,8 +158,8 @@ export default function CreateEvent() {
 
   // Page 1 content
   const page1 = (
-    <div className="min-h-[330px] border p-10 rounded-lg border-gray-500">
-      <div className="w-[400px]">
+    <div className="min-h-[330px] border max-w-[400px] p-4 sm:p-10 rounded-lg border-gray-500">
+      <div className="">
         <h1 className="text-2xl font-bold mb-3">Create an event</h1>
         <p className="text-gray-500">
           Please fill in your event info{" "}
@@ -206,8 +206,8 @@ export default function CreateEvent() {
 
   // Page 2
   const page2 = (
-    <div className="min-h-[330px] border p-10 rounded-lg border-gray-500">
-      <div className="w-[400px]  flex flex-col justify-center items-center">
+    <div className="min-h-[330px] border max-w-[400px] p-4 sm:p-10  rounded-lg border-gray-500">
+      <div className="flex flex-col justify-center items-center">
         {errors.length > 1 && (
           <FixedBanner
             messages={errors}

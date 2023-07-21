@@ -6,6 +6,7 @@ import EventCard from "./components/eventCard";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CgSpinner } from "react-icons/cg";
+import Footer from "../components/Footer";
 
 export default function Dashboard() {
   const [comingEvents, setComingEvents] = useState(true);
@@ -37,7 +38,6 @@ export default function Dashboard() {
     }
 
     setDisplayEvents(result);
-    
   }, [comingEvents, events]);
 
   return (
@@ -86,6 +86,9 @@ export default function Dashboard() {
             />
           </Link>
         ))}
+      </div>
+      <div className="flex justify-center">
+        <Footer />
       </div>
     </div>
   );

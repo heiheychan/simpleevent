@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import HomeForm from "@/app/components/HomeForm";
 import { LiaCocktailSolid, LiaCookieBiteSolid } from "react-icons/lia";
 import JoinEvent from "./components/joinEvent";
+import Footer from "@/app/components/Footer";
 
 export default async function EventDetail({ params }) {
   const eventId = params.eventId;
@@ -79,8 +80,10 @@ export default async function EventDetail({ params }) {
   );
 
   return (
-    <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg max-h-[660px] border border-gray-500 ">
-      {session?.user ? eventDetails : homeForm}
-    </div>
+    <>
+      <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg max-h-[660px] border border-gray-500 ">
+        {session?.user ? eventDetails : homeForm}
+      </div>
+    </>
   );
 }
