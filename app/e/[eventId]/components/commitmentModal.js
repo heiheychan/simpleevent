@@ -7,7 +7,8 @@ import OneCommitment from "./oneCommitment";
 export default function CommitmentModal({
   commitments,
   onCloseHandler,
-  onSubmitHandler
+  onSubmitHandler,
+  name
 }) {
   const [content, setContent] = useState("");
 

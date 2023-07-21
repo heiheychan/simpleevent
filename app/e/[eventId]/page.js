@@ -11,7 +11,6 @@ export default async function EventDetail({ params }) {
   const eventId = params.eventId;
   const session = await getServerSession(authOptions);
 
-  console.time();
   const event = await prisma.event.findUnique({
     where: {
       id: eventId,
@@ -21,10 +20,9 @@ export default async function EventDetail({ params }) {
       datetime: true,
       name: true,
       location: true,
-      maxguests: true
+      maxguests: true,
     },
-  });  
-  console.timeEnd();
+  });
 
   if (event !== null) <div>Event not found</div>;
 
@@ -39,7 +37,7 @@ export default async function EventDetail({ params }) {
     },
   });
 
-  record.length > 0 ? joined = true : joined = false;
+  record.length > 0 ? (joined = true) : (joined = false);
 
   const eventDetails = (
     <>

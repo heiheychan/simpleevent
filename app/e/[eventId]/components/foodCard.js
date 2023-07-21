@@ -76,7 +76,6 @@ export default function FoodCard({ name, id, maxguests, setMessages }) {
           onOpenHandler={modalOpenHandler}
           onCloseHandler={modalCloseHandler}
           name={name}
-          id={id}
           onSubmitHandler={commitmentSubmitHandler}
           commitments={commitments}
         />

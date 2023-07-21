@@ -14,9 +14,8 @@ export default function OneCommitment({ name, comment, commitDate }) {
           {comment !== "" && "and commented:"}
         </p>
         <div
-          className={`px-6 py-4 border-gray-300 rounded-lg ${
-            comment !== "" && "border"
-          }`}
+          className={`px-6 border-gray-300 rounded-lg  
+            ${comment !== "" ? "py-4 border" : "py-2"}`}
         >
           {comment}
         </div>
