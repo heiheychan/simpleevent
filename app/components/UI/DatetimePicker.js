@@ -4,7 +4,7 @@ export default function DatetimePicker({ value, setValue}) {
   
   return (
     <div className="w-full my-2">
-      <p className="w-full font-bold">Datetime</p>
+      <p className="w-full">Datetime</p>
       <input
         value={value}
         type="datetime-local"

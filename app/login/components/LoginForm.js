@@ -34,7 +34,7 @@ export default function LoginForm({ email }) {
   }
 
   return (
-    <div className="w-full flex flex-col max-w-[400px] mt-6">
+    <div className="w-full flex flex-col">
       {error.length > 0 && (
         <FixedBanner color="bg-red-500" messages={error} />
       )}
@@ -52,7 +52,7 @@ export default function LoginForm({ email }) {
         value={enteredPassword}
         setValue={setPasswordHandler}
       />
-      <Button content="Log in" onClickHandler={onClickHandler} bgcolor="bg-red-500" />
+      <Button content="Log in" onClickHandler={onClickHandler} bgcolor="bg-orange-500" />
     </div>
   );
 }

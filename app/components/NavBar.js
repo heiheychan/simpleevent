@@ -11,7 +11,7 @@ export default function NavBar({ session }) {
     <div className="h-14 flex justify-center px-2">
       <nav className="container flex flex-row justify-between items-center h-full">
         <Link href="/">
-          <div className="font-serif rounded-lg border-gray-500 border w-10 h-10 flex justify-center items-center">
+          <div className="font-serif bg-white rounded-lg border-gray-500 border w-10 h-10 flex justify-center items-center">
             S.
           </div>
         </Link>
@@ -22,12 +22,12 @@ export default function NavBar({ session }) {
                 <>
                   <Link
                     href="/create-event"
-                    className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500 mr-1"
+                    className="flex justify-center items-center rounded-lg h-12 px-4 bg-orange-500 text-white mr-2 hover:opacity-80"
                   >
                     Create event
                   </Link>
                   <button
-                    className="flex justify-center items-center rounded-full h-12 px-4 font-bold border border-gray-500"
+                    className="flex justify-center items-center rounded-lg h-12 px-4 bg-white border border-gray-500 text-gray-500 hover:opacity-80"
                     onClick={() => signOut({ callbackUrl: "/" })}
                   >
                     Log out

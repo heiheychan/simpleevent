@@ -1,5 +1,5 @@
 import { authOptions } from "@/lib/auth";
-import { getServerSession  } from "next-auth";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 import HomeHeader from "./components/HomeHeader";
@@ -10,14 +10,14 @@ export default async function Home() {
   // Page protection
   const session = await getServerSession(authOptions);
   if (session) {
-    redirect("/dashboard")
+    redirect("/dashboard");
   }
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       <HomeHeader />
       <HomeForm />
       <Footer />
-    </>
+    </div>
   );
 }

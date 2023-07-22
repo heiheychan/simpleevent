@@ -1,0 +1,26 @@
+.sp {
+  height: 105%;
+  color: #f97417;
+  animation: spin_words 4s infinite;
+}
+
+@keyframes spin_words {
+  16% {
+    transform: translateY(-105%);
+  }
+  30% {
+    transform: translateY(-100%);
+  }
+  48% {
+    transform: translateY(-205%);
+  }
+  60% {
+    transform: translateY(-200%);
+  }
+  80% {
+    transform: translateY(-305%);
+  }
+  100% {
+    transform: translateY(-300%);
+  }
+}

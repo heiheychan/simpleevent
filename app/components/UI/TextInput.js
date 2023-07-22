@@ -15,11 +15,11 @@ export default function TextInput({
 
   const subtextClass = `text-xs ${subtextcolor} w-full`;
   return (
-    <div className="w-full my-2">
-      <p className="w-full font-bold">{label}</p>
+    <div className="w-full mb-2">
+      <p className="w-full mb-2">{label}</p>
       <input
         type={type}
-        className="w-full px-3 h-12 border border-gray-500 rounded-lg my-1 mb-1 focus:outline-none focus:border-gray-500 disabled:bg-gray-300 placeholder-gray-300"
+        className="w-full px-2 h-12 border border-gray-500 rounded-lg mb-2 focus:outline-none focus:border-gray-500 disabled:bg-gray-300 placeholder-gray-300"
         placeholder={placeholder}
         value={value}
         onChange={setValue}
@@ -27,7 +27,7 @@ export default function TextInput({
         min={min}
         max={max}
       ></input>
-      <p className={subtextClass}>{subtext}</p>
+      {subtext && <p className={`${subtextClass} mb-2`}>{subtext}</p>}
     </div>
   );
 }

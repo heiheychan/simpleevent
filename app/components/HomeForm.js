@@ -50,15 +50,15 @@ export default function HomeForm() {
   };
 
   return (
-    <div className="w-full flex flex-col max-w-[400px] mt-6">
+    <div className="w-full sm:w-[390px]">
       {error.length > 0 && <FixedBanner color="bg-red-500" messages={error} setMessages={setError}/>}
       <TextInput
-        placeholder="example@example.com"
-        label="Enter your email to proceed"
+        placeholder="house@party.com"
+        label="📮 Enter your email to get started"
         value={email}
         setValue={setEmailHandler}
       />
-      <Button content="Log in / Sign up" onClickHandler={formSubmitHandler} bgcolor="bg-red-500" />
+      <Button content="Log in / Sign up" onClickHandler={formSubmitHandler} bgcolor="bg-orange-500" />
     </div>
   );
 }

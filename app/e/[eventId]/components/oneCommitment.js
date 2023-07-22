@@ -7,10 +7,10 @@ export default function OneCommitment({ name, comment, commitDate }) {
   TimeAgo.addLocale(en)
 
   return (
-    <div className="w-full border-l-2 border-l-gray-500 flex flex-row justify-between items-start p-4 pt-0 relative">
+    <div className="w-full border-l-2 border-l-gray-300 flex flex-row justify-between items-start p-4 pt-0 relative">
       <div className="flex flex-col items-start w-4/5 pl-2">
         <p className="pb-2">
-          <span className="font-bold text-gray-500">{name}</span> is bringing it
+          <span>{name}</span> is bringing it
           {comment !== "" && "and commented:"}
         </p>
         <div
@@ -24,7 +24,7 @@ export default function OneCommitment({ name, comment, commitDate }) {
         <ReactTimeAgo date={new Date(commitDate).getTime()} locale="en-US" />
       </div>
       <div className="h-[25px] w-[25px] rounded-full bg-white absolute -left-[13px] flex justify-center items-center">
-        <div className="h-[15px] w-[15px] rounded-full bg-gray-300 border border-gray-500"></div>
+        <div className="h-[15px] w-[15px] rounded-full bg-green-500 border border-green-300 animate-pulse"></div>
       </div>
     </div>
   );

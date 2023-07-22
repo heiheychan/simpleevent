@@ -37,7 +37,7 @@ export default function FoodCard({ name, id, maxguests, setMessages }) {
     } else {
       setCalculatedWidth(
         Math.ceil(
-          ((commitments.length - 1) / (maxguests - 1)) * (150 * 2 / 3) +
+          ((commitments.length - 1) / (maxguests - 1)) * ((150 * 2) / 3) +
             minWidth
         )
       );
@@ -82,31 +82,31 @@ export default function FoodCard({ name, id, maxguests, setMessages }) {
           commitments={commitments}
         />
       )}
-      {loading ? (
-        <div className="mb-3 relative bg-white h-[48px] w-full rounded-full border border-gray-500 flex items-center pl-4">
-          <CgSpinner className="animate-spin" size={30} />
-        </div>
-      ) : (
-        <div
-          className="mb-3 relative bg-white h-[48px] w-full rounded-full border border-gray-500"
-          onClick={doubleClickEventHandler}
-        >
-          <div
-            className={`h-[46px] bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}
-            style={{ width: calculatedWidth }}
-          ></div>
-          <div className="absolute left-4 top-0 h-12 flex items-center font-bold pb-1">
-            <p>{name}</p>
-            <div className="text-xs px-1 h-[18px] border border-gray-500 bg-white rounded-lg ml-1">{`${commitments.length}`}</div>
-          </div>
-          <div
-            className="absolute right-[2px] top-[2px] h-[41px] w-10 flex items-center justify-center rounded-full border border-gray-500"
-            onClick={modalOpenHandler}
-          >
-            <BiCommentDetail size={16} />
-          </div>
-        </div>
-      )}
+      <div
+        className="mb-2 relative bg-white h-10 w-full rounded-full border border-gray-500 flex items-center hover:cursor-pointer"
+        onClick={!loading && doubleClickEventHandler}
+      >
+        {loading ? (
+          <CgSpinner className="animate-spin ml-2" size={30} />
+        ) : (
+          <>
+            <div
+              className={`h-[38px] bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}
+              style={{ width: calculatedWidth }}
+            ></div>
+            <div className="absolute left-4 top-0 h-[38px] flex items-center">
+              <p>{name}</p>
+              <div className="text-xs px-1 h-4 border border-gray-500 bg-white rounded-lg ml-1">{`${commitments.length}`}</div>
+            </div>
+            <div
+              className="absolute right-[2px] top-[2px] h-[34px] w-[34px] flex items-center justify-center rounded-full border border-gray-500"
+              onClick={modalOpenHandler}
+            >
+              <BiCommentDetail size={16} />
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 }

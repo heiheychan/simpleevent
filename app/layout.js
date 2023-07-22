@@ -25,12 +25,10 @@ export default async function RootLayout({ children }) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
       </Head>
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className="containter bg-gray-100">
         <NextAuthProvider>
-          <NavBar session={session} />
-          <main className="flex flex-col items-center pt-6 sm:pt-12 px-4">
+            <NavBar session={session} />
             {children}
-          </main>
         </NextAuthProvider>
       </body>
     </html>

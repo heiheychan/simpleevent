@@ -35,10 +35,7 @@ export default function EventFoodList({ eventId, maxguests }) {
         />
       )}
       <div className="w-full h-[500px] bg-white border border-gray-500 rounded-lg flex flex-col p-4 overflow-scroll">
-        <p className="text-gray-500 text-sm mb-2 flex flex-row items-center">
-          <PiBowlFoodFill size={12} className="mr-1" />
-          Food list&nbsp;<span className="italic">{"(doubleclick to add food)"}</span>
-        </p>
+        <p className="text-xs text-gray-500 mb-2">What to bring {"(double click to add)"}:</p>
         {loading ? (
           <div className="w-full h-full flex justify-center items-center">
             <CgSpinner className="animate-spin" size={30} />

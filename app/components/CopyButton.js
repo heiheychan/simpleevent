@@ -33,7 +33,7 @@ export default function CopyButton({ name, id }) {
       >
         <button
           onClick={copyClickHandler}
-          className={`h-8 w-8 flex justify-center items-center rounded-full border border-gray-500 ${
+          className={`bg-white h-8 w-8 flex justify-center items-center rounded-full border border-gray-500 ${
             copied.length > 0 && "bg-green-300"
           }`}
         >

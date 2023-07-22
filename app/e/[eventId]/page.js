@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
 import HomeForm from "@/app/components/HomeForm";
 import { LiaCocktailSolid, LiaCookieBiteSolid } from "react-icons/lia";
 import JoinEvent from "./components/joinEvent";
-import Footer from "@/app/components/Footer";
 
 export default async function EventDetail({ params }) {
   const eventId = params.eventId;
@@ -42,31 +41,29 @@ export default async function EventDetail({ params }) {
 
   const eventDetails = (
     <>
-      <div className="mb-4">
-        <EventCard
-          id={event.id}
-          datetime={event.datetime.toISOString()}
-          name={event.name}
-          location={event.location}
-          joined={joined}
-        />
-      </div>
-      {joined ? (
-        <EventFoodList eventId={eventId} maxguests={event.maxguests} />
-      ) : (
-        <div className="w-full h-[500px] bg-white border border-gray-500 rounded-lg flex flex-col justify-center items-center p-4 overflow-scroll">
+      <EventCard
+        id={event.id}
+        datetime={event.datetime.toISOString()}
+        name={event.name}
+        location={event.location}
+        joined={joined}
+      />
+      <div className="w-full max-h-[400px] flex flex-col justify-center items-center p-4 pt-0">
+        {joined ? (
+          <EventFoodList eventId={eventId} maxguests={event.maxguests} />
+        ) : (
           <JoinEvent eventId={eventId} />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 
   const homeForm = (
-    <div className="min-h-[330px] py-4 flex flex-col justify-between items-center">
+    <div className="min-h-[330px] p-4 flex flex-col justify-between items-center">
       <div className="w-full">
-        <h1 className="mb-4 text-2xl">
+        <h1 className="mb-4 text-2xl font-light ">
           You&apos;re invited to{" "}
-          <span className="font-serif font-light underline italic">
+          <span className="underline">
             {event.name}
           </span>
         </h1>
@@ -80,10 +77,10 @@ export default async function EventDetail({ params }) {
   );
 
   return (
-    <>
-      <div className="w-full max-w-[400px] bg-gray-50 p-6 rounded-lg max-h-[660px] border border-gray-500 ">
+    <div className="flex flex-col items-center pt-8">
+      <div className="w-full sm:w-[400px] bg-white rounded-lg border border-gray-500">
         {session?.user ? eventDetails : homeForm}
       </div>
-    </>
+    </div>
   );
 }

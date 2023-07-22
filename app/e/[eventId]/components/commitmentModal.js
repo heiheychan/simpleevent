@@ -55,13 +55,13 @@ export default function CommitmentModal({
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full sm:my-8 sm:max-w-lg">
                 <div className="p-6">
-                  <h1 className="text-2xl mb-8 h-[16px]">
+                  <h1 className="text-2xl font-light mb-8 h-[16px]">
                     Who is bringing{" "}
-                    <span className="underline font-extralight font-serif italic">
+                    <span className="underline font-bold ">
                       {name}?
                     </span>
                   </h1>
-                  <div className="pl-2 overflow-scroll max-h-[450px]">
+                  <div className="pl-2 overflow-scroll max-h-[400px]">
                     {commitments.map((commitment) => (
                       <OneCommitment
                         name={commitment.user.name}
@@ -81,13 +81,13 @@ export default function CommitmentModal({
                     ></textarea>
                     <div className="flex justify-between items-center">
                       <button
-                        className="h-12 rounded-full border border-gray-300 bg-gray-500 text-white font-bold px-4"
+                        className="flex justify-center items-center rounded-lg h-12 px-4 bg-white border border-gray-500 text-gray-500 hover:opacity-80"
                         onClick={onCloseHandler}
                       >
                         cancel
                       </button>
                       <button
-                        className="h-12 rounded-full border border-gray-500 font-bold px-4"
+                        className="flex justify-center items-center rounded-lg h-12 px-4 bg-orange-500 text-white mr-2 hover:opacity-80"
                         onClick={() => {
                           onSubmitHandler(content);
                           setContent("");

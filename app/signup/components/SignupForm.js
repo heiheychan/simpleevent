@@ -83,7 +83,7 @@ export default function SignupForm({ email }) {
       <Button
         content="Sign up"
         onClickHandler={onClickHandler}
-        bgcolor="bg-red-500"
+        bgcolor="bg-orange-500"
       />
     </div>
   );

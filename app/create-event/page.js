@@ -158,56 +158,56 @@ export default function CreateEvent() {
 
   // Page 1 content
   const page1 = (
-    <div className="min-h-[330px] border max-w-[400px] p-4 sm:p-10 rounded-lg border-gray-500">
-      <div className="">
-        <h1 className="text-2xl font-bold mb-3">Create an event</h1>
-        <p className="text-gray-500">
-          Please fill in your event info{" "}
-          <span className="font-bold text-red-500">{"(all required)"}</span>
-        </p>
-      </div>
-      <div className="w-full flex flex-col max-w-[400px] mt-6">
-        <TextInput
-          label="Event name*"
-          placeholder="Amazin summer grill"
-          type="text"
-          value={enteredName}
-          setValue={setEnteredNameHandler}
-        />
-        <DatetimePicker
-          value={enteredDatetime}
-          setValue={setEnteredDatetimeHandler}
-        />
-        <TextInput
-          label="Location*"
-          placeholder="Bill's backyard"
-          type="text"
-          value={enteredLocation}
-          setValue={setEnteredLocationHandler}
-        />
-        <TextInput
-          label="Max number of guests*"
-          type="number"
-          min="0"
-          max="100"
-          subtext="Between 1 to 100"
-          placeholder={10}
-          value={enteredNumGuest}
-          setValue={setEnteredNumGuestHandler}
-        />
-        <Button
-          content="Next: What to Bring?"
-          onClickHandler={switchPageHandler}
-          bgcolor="bg-red-500"
-        />
+    <div className="flex flex-col justify-center items-center pt-6">
+      <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white">
+          <h1 className="text-4xl font-light mb-2">Create an event</h1>
+          <p className="text-gray-500">
+            Please fill in your event info{" "}
+            <span className=" text-red-500">{"(all required)"}</span>
+          </p>
+        <div className="w-full flex flex-col max-w-[400px] mt-6">
+          <TextInput
+            label="Event name"
+            placeholder="Amazin summer grill"
+            type="text"
+            value={enteredName}
+            setValue={setEnteredNameHandler}
+          />
+          <DatetimePicker
+            value={enteredDatetime}
+            setValue={setEnteredDatetimeHandler}
+          />
+          <TextInput
+            label="Location"
+            placeholder="Bill's backyard"
+            type="text"
+            value={enteredLocation}
+            setValue={setEnteredLocationHandler}
+          />
+          <TextInput
+            label="Max number of guests"
+            type="number"
+            min="0"
+            max="100"
+            subtext="Between 1 to 100"
+            placeholder={10}
+            value={enteredNumGuest}
+            setValue={setEnteredNumGuestHandler}
+          />
+          <Button
+            content="Next: What to Bring?"
+            onClickHandler={switchPageHandler}
+            bgcolor="bg-orange-500"
+          />
+        </div>
       </div>
     </div>
   );
 
   // Page 2
   const page2 = (
-    <div className="min-h-[330px] border max-w-[400px] p-4 sm:p-10  rounded-lg border-gray-500">
-      <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center pt-6">
+    <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white flex flex-col justify-center">
         {errors.length > 1 && (
           <FixedBanner
             messages={errors}
@@ -216,7 +216,7 @@ export default function CreateEvent() {
           />
         )}
         <div className="w-full max-w-[400px]">
-          <h1 className="text-2xl font-bold mb-3">What to bring?</h1>
+          <h1 className="text-4xl font-light mb-2">What to bring?</h1>
           <p className="text-gray-500">
             Please add the food you want your guests to bring
           </p>
@@ -253,7 +253,7 @@ export default function CreateEvent() {
         <AddFoodButton addFoodHandler={addFoodHandler} />
         <Button
           content="Create event"
-          bgcolor="bg-red-500"
+          bgcolor="bg-orange-500"
           onClickHandler={formSubmission}
         />
         <button onClick={switchPageHandler} className="mt-2 underline">

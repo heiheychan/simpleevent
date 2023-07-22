@@ -41,54 +41,55 @@ export default function Dashboard() {
   }, [comingEvents, events]);
 
   return (
-    <div className="w-full max-w-[400px] flex flex-col">
-      <div className="flex flex-row items-center mb-2">
-        <h1
-          className={`mr-1 text-2xl font-bold ${
-            comingEvents ? "underline" : "text-gray-300"
-          }`}
-          onClick={() => {
-            setComingEvents(true);
-          }}
-        >
-          Upcoming events
-        </h1>
-        /
-        <h1
-          className={`ml-1 text-2xl font-bold ${
-            !comingEvents ? "underline" : "text-gray-300"
-          }`}
-          onClick={() => {
-            setComingEvents(false);
-          }}
-        >
-          Past events
-        </h1>
-      </div>
-      <div className="py-2 flex flex-col justify-center items-center">
-        {loading && <CgSpinner className="animate-spin mt-6" size={30} />}
-        {displayEvents.map((ele) => (
-          <Link
-            key={ele.event.id}
-            href={`/e/${ele.event.id}`}
-            className={`py-4 w-full rounded-lg mb-2 px-6 flex flex-col justify-center border border-gray-500 cursor-pointer ${
-              comingEvents ? "" : "pointer-events-none bg-gray-50"
+    <div className="flex flex-col items-center">
+      <div className="max-w-[390px] pt-8">
+        <div className="flex flex-row items-center mb-2">
+          <h1
+            className={`mr-4 text-2xl font-light ${
+              comingEvents ? "underline text-orange-500" : "text-gray-300"
             }`}
+            onClick={() => {
+              setComingEvents(true);
+            }}
           >
-            <EventCard
+            Upcoming events
+          </h1>
+          <h1
+            className={`text-2xl font-light ${
+              !comingEvents ? "underline text-orange-500" : "text-gray-300"
+            }`}
+            onClick={() => {
+              setComingEvents(false);
+            }}
+          >
+            past events
+          </h1>
+        </div>
+        <div className="py-2 flex flex-col justify-center items-center">
+          {loading && <CgSpinner className="animate-spin mt-6" size={30} />}
+          {displayEvents.map((ele) => (
+            <Link
               key={ele.event.id}
-              id={ele.event.id}
-              name={ele.event.name}
-              location={ele.event.location}
-              datetime={ele.event.datetime}
-              host={ele.host}
-              joined={true}
-            />
-          </Link>
-        ))}
-      </div>
-      <div className="flex justify-center">
-        <Footer />
+              href={`/e/${ele.event.id}`}
+              className={`border border-gray-500 w-[390px] rounded-lg ${
+                comingEvents ? "" : "pointer-events-none bg-gray-50"
+              }`}
+            >
+              <EventCard
+                key={ele.event.id}
+                id={ele.event.id}
+                name={ele.event.name}
+                location={ele.event.location}
+                datetime={ele.event.datetime}
+                host={ele.host}
+                joined={true}
+              />
+            </Link>
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <Footer />
+        </div>
       </div>
     </div>
   );
