@@ -1,8 +1,10 @@
 import { MdOutlineLocationOn } from "react-icons/md";
 import { PiCrownSimpleBold } from "react-icons/pi";
+import { HiDotsVertical } from 'react-icons/hi'
 
 import { dayList } from "@/lib/dayList";
 import CopyButton from "@/app/components/CopyButton";
+import CardDropdown from "./cardDropdown";
 
 export default function EventCard({
   id,
@@ -11,6 +13,7 @@ export default function EventCard({
   location,
   host,
   joined,
+  setClickDisable
 }) {
   const utc = new Date(datetime);
 
@@ -36,8 +39,9 @@ export default function EventCard({
           </div>
         )}
         {joined && (
-          <div className="absolute -bottom-4 right-4">
+          <div className="absolute -bottom-4 right-4 flex flex-row gap-2">
             <CopyButton id={id} name={name} />
+            <CardDropdown host={host} setClickDisable={setClickDisable} />
           </div>
         )}
       </div>

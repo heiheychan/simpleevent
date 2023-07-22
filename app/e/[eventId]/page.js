@@ -47,6 +47,7 @@ export default async function EventDetail({ params }) {
         name={event.name}
         location={event.location}
         joined={joined}
+        host={record[0].host}
       />
       <div className="w-full max-h-[400px] flex flex-col justify-center items-center p-4 pt-0">
         {joined ? (

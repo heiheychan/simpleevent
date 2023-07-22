@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [events, setEvents] = useState([]);
   const [displayEvents, setDisplayEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [clickDisable, setClickDisable] = useState(false)
 
   useEffect(() => {
     setLoading(true);
@@ -70,10 +71,10 @@ export default function Dashboard() {
           {displayEvents.map((ele) => (
             <Link
               key={ele.event.id}
-              href={`/e/${ele.event.id}`}
-              className={`border border-gray-500 w-[390px] rounded-lg ${
+              href={clickDisable ? "#" : `/e/${ele.event.id}`}
+              className={`mb-2 border border-gray-500 w-[390px] sm:max-w-full rounded-lg ${
                 comingEvents ? "" : "pointer-events-none bg-gray-50"
-              }`}
+              } ${clickDisable && "cursor-default"}`}
             >
               <EventCard
                 key={ele.event.id}
@@ -83,6 +84,7 @@ export default function Dashboard() {
                 datetime={ele.event.datetime}
                 host={ele.host}
                 joined={true}
+                setClickDisable={setClickDisable}
               />
             </Link>
           ))}
