@@ -26,7 +26,7 @@ export default async function EventDetail({ params }) {
 
   if (event !== null) <div>Event not found</div>;
 
-  let joined;
+  
 
   const record = await prisma.EventsOnUsers.findMany({
     where: {
@@ -37,7 +37,16 @@ export default async function EventDetail({ params }) {
     },
   });
 
-  record.length > 0 ? (joined = true) : (joined = false);
+  let joined;
+  let host;
+
+  if (record.length > 0) {
+    joined = true;
+    host = record[0].host;
+  } else {
+    joined = false;
+    host = false;
+  }
 
   const eventDetails = (
     <>
@@ -47,7 +56,7 @@ export default async function EventDetail({ params }) {
         name={event.name}
         location={event.location}
         joined={joined}
-        host={record[0].host}
+        host={host}
       />
       <div className="w-full max-h-[400px] flex flex-col justify-center items-center p-4 pt-0">
         {joined ? (
@@ -60,16 +69,11 @@ export default async function EventDetail({ params }) {
   );
 
   const homeForm = (
-    <div className="min-h-[330px] p-4 flex flex-col justify-between items-center">
-      <div className="w-full">
-        <h1 className="mb-4 text-2xl font-light ">
-          You&apos;re invited to{" "}
-          <span className="underline">
-            {event.name}
-          </span>
-        </h1>
-        <HomeForm />
-      </div>
+    <div className="px-2 py-8 h-80 flex flex-col justify-between items-center">
+      <h1 className="mb-4 text-2xl font-light ">
+        You&apos;re invited to <span className="underline">{event.name}</span>
+      </h1>
+      <HomeForm />
       <div className="flex">
         <LiaCocktailSolid size={30} />
         <LiaCookieBiteSolid size={30} />

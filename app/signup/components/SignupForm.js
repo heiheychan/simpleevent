@@ -55,7 +55,7 @@ export default function SignupForm({ email }) {
   };
 
   return (
-    <div className="w-full flex flex-col max-w-[400px] mt-6">
+    <div className="w-full flex flex-col mt-6">
       {error.length > 0 && <FixedBanner color="bg-red-500" messages={error} />}
       <TextInput
         placeholder="example@example.com"

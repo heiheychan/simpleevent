@@ -66,13 +66,13 @@ export default function Dashboard() {
             past events
           </h1>
         </div>
-        <div className="py-2 flex flex-col justify-center items-center">
+        <div className="py-2 flex flex-col justify-center items-center w-[390px] sm:max-w-full">
           {loading && <CgSpinner className="animate-spin mt-6" size={30} />}
           {displayEvents.map((ele) => (
             <Link
               key={ele.event.id}
               href={clickDisable ? "#" : `/e/${ele.event.id}`}
-              className={`mb-2 border border-gray-500 w-[390px] sm:max-w-full rounded-lg ${
+              className={`mb-2 w-[390px] sm:max-w-full border border-gray-500 rounded-lg ${
                 comingEvents ? "" : "pointer-events-none bg-gray-50"
               } ${clickDisable && "cursor-default"}`}
             >

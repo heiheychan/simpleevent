@@ -41,7 +41,7 @@ export default function EventCard({
         {joined && (
           <div className="absolute -bottom-4 right-4 flex flex-row gap-2">
             <CopyButton id={id} name={name} />
-            <CardDropdown host={host} setClickDisable={setClickDisable} />
+            <CardDropdown id={id} host={host} setClickDisable={setClickDisable} />
           </div>
         )}
       </div>

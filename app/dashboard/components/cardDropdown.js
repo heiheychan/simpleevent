@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 
 import Link from "next/link";
 
-export default function CardDropdown({ host, setClickDisable }) {
+export default function CardDropdown({ id, host, setClickDisable }) {
   const [ref, inView] = useInView({
     triggerOnce: false,
     rootMargin: "0px 0px",
@@ -46,7 +46,7 @@ export default function CardDropdown({ host, setClickDisable }) {
               <>
                 <Menu.Item>
                   <Link
-                    href="#"
+                    href={`/e/${id}/edit`}
                     className="px-4 py-2 text-sm hover:bg-gray-100"
                   >
                     Edit event

@@ -11,7 +11,7 @@ export default function OneCommitment({ name, comment, commitDate }) {
       <div className="flex flex-col items-start w-4/5 pl-2">
         <p className="pb-2">
           <span>{name}</span> is bringing it
-          {comment !== "" && "and commented:"}
+          {comment !== "" && " and commented:"}
         </p>
         <div
           className={`px-6 border-gray-300 rounded-lg  
