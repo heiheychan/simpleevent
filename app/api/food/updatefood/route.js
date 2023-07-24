@@ -8,6 +8,28 @@ export async function POST(request) {
   );
   const newFood = processedFoodList.filter((ele) => typeof ele.id === "string");
 
+  const currentFoods = await prisma.food.findMany({
+    where: {
+      eventId: eventId
+    },
+    select: {
+      id: true
+    }
+  })
+
+  const processedIdList = processedFoodList.map((ele) => ele.id)
+  const removedFood = currentFoods.filter((ele) => {
+    return processedIdList.indexOf(ele.id) < 0 
+  })
+
+  removedFood.forEach(async (ele) => {
+    await prisma.food.delete({
+      where: {
+        id: ele.id
+      }
+    })
+  })
+
   if (existingFood && existingFood.length > 0) {
     existingFood.forEach(async (food) => {
       await prisma.food.update({
