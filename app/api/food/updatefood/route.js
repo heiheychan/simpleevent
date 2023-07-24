@@ -3,7 +3,6 @@ import { prisma } from "@/lib/db";
 export async function POST(request) {
   const { eventId, processedFoodList } = await request.json();
 
-
   const existingFood = processedFoodList.filter(
     (ele) => typeof ele.id === "number"
   );
@@ -24,7 +23,13 @@ export async function POST(request) {
   }
 
   if (newFood && newFood.length > 0) {
-    const removedId = newFood.map(({id, ...food}) => food.eventId = eventId);
+    const removedId = newFood.map(({ id, ...food }) => {
+      return {
+        name: food.name,
+        order: food.order,
+        eventId: eventId,
+      };
+    });
 
     await prisma.food.createMany({ data: removedId });
   }

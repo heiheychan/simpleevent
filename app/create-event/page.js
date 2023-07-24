@@ -152,7 +152,6 @@ export default function CreateEvent() {
 
     // Add order value to the food list
     const processedFoodList = processFoodList(foodList);
-    console.log(processFoodList)
 
     const response = await axios.post("/api/event/createevent", {
       name: enteredName,

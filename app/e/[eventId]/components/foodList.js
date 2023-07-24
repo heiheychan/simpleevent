@@ -6,14 +6,12 @@ import { CgSpinner } from "react-icons/cg";
 import EventFoodList from "./eventFoodList";
 import FixedBanner from "@/app/components/UI/FixedBanner";
 import EditFoodList from "./editFoodList";
-import { useRouter } from "next/navigation";
 
 export default function FoodList({ eventId, maxguests, host }) {
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [foodList, setFoodList] = useState([]);
-  const router = useRouter();
 
   const fetchFoods = async () => {
     setLoading(true);
@@ -21,13 +19,15 @@ export default function FoodList({ eventId, maxguests, host }) {
     const sortedList = response.data.foods.sort((a, b) =>
       a.order > b.order ? 1 : -1
     );
+
     setFoodList(sortedList);
     setLoading(false);
   };
 
   useEffect(() => {
+    setFoodList([])
     fetchFoods();
-  }, []);
+  }, [editMode]);
 
   const processFoodList = (fl) => {
     const newfl = fl.map((ele, index) => {
@@ -44,8 +44,7 @@ export default function FoodList({ eventId, maxguests, host }) {
       processedFoodList,
     });
     if (response.status === 200) {
-      fetchFoods();
-      setEditMode(false);
+      window.location.reload();
     }
   };
 
