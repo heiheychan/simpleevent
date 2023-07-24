@@ -18,9 +18,10 @@ export async function POST(request) {
   const response = await prisma.EventsOnUsers.findMany({
     where: {
       userId: user.id,
-      eventId: body.eventId
+      eventId: body.eventId,
     },
     select: {
+      host: true,
       event: true
     }
   });

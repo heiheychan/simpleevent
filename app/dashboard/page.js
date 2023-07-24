@@ -43,7 +43,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="max-w-[390px] pt-8">
+      <div className="max-w-[390px] pt-8 flex flex-col">
         <div className="flex flex-row items-center mb-2">
           <h1
             className={`mr-4 text-2xl font-light ${
@@ -66,12 +66,12 @@ export default function Dashboard() {
             past events
           </h1>
         </div>
-        <div className="py-2 flex flex-col justify-center items-center w-[390px] sm:max-w-full">
-          {loading && <CgSpinner className="animate-spin mt-6" size={30} />}
+        <div className="py-2 flex flex-col min-h-[600px] w-[390px] sm:max-w-full pb-32 items-center">
+          {loading && <CgSpinner className="animate-spin my-6" size={30} />}
           {displayEvents.map((ele) => (
             <Link
               key={ele.event.id}
-              href={clickDisable ? "#" : `/e/${ele.event.id}`}
+              href={clickDisable ? "" : `/e/${ele.event.id}`}
               className={`mb-2 w-[390px] sm:max-w-full border border-gray-500 rounded-lg ${
                 comingEvents ? "" : "pointer-events-none bg-gray-50"
               } ${clickDisable && "cursor-default"}`}
@@ -83,6 +83,7 @@ export default function Dashboard() {
                 location={ele.event.location}
                 datetime={ele.event.datetime}
                 host={ele.host}
+                covercolor={ele.event.covercolor}
                 joined={true}
                 setClickDisable={setClickDisable}
               />

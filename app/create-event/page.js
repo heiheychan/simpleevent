@@ -29,6 +29,7 @@ export default function CreateEvent() {
   const [enteredDatetime, setEnteredDatetime] = useState(new Date());
   const [enteredLocation, setEnteredLocation] = useState("");
   const [enteredNumGuest, setEnteredNumGuest] = useState("");
+  const [enteredCoverColor, setEnteredCoverColor] = useState("#B8E0FD");
 
   const setEnteredDatetimeHandler = (e) => {
     setEnteredDatetime(e.target.value);
@@ -44,6 +45,11 @@ export default function CreateEvent() {
 
   const setEnteredNumGuestHandler = (e) => {
     setEnteredNumGuest(e.target.value);
+  };
+
+  const setEnteredCoverColorHandler = (e) => {
+    setEnteredCoverColor(e.target.value);
+    console.log(enteredCoverColor);
   };
 
   const setFoodListHandler = (e) => {
@@ -101,6 +107,10 @@ export default function CreateEvent() {
       errorMessage: "Event name is invalid",
     },
     {
+      valid: validator.isHexColor(enteredCoverColor),
+      errorMessage: "Cover color is invalid",
+    },
+    {
       valid: validator.isInt(enteredNumGuest, { min: 1, max: 100 }),
       errorMessage: "Number of Guest is invalid",
     },
@@ -119,7 +129,7 @@ export default function CreateEvent() {
       return { ...ele, order: index };
     });
 
-    setFoodList(newfl);
+    return newfl
   };
 
   const formSubmission = async () => {
@@ -141,14 +151,16 @@ export default function CreateEvent() {
     }
 
     // Add order value to the food list
-    processFoodList(foodList);
+    const processedFoodList = processFoodList(foodList);
+    console.log(processFoodList)
 
     const response = await axios.post("/api/event/createevent", {
       name: enteredName,
       eventdatetime: enteredDatetime,
       location: enteredLocation,
       numguest: enteredNumGuest,
-      foodlist: [...foodList],
+      covercolor: enteredCoverColor,
+      foodlist: [...processedFoodList],
     });
 
     if (response.status === 200) {
@@ -160,19 +172,32 @@ export default function CreateEvent() {
   const page1 = (
     <div className="flex flex-col justify-center items-center pt-6">
       <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white">
-          <h1 className="text-4xl font-light mb-2">Create an event</h1>
-          <p className="text-gray-500">
-            Please fill in your event info{" "}
-            <span className=" text-red-500">{"(all required)"}</span>
-          </p>
+        <h1 className="text-4xl font-light mb-2">Create an event</h1>
+        <p className="text-gray-500">
+          Please fill in your event info{" "}
+          <span className=" text-red-500">{"(all required)"}</span>
+        </p>
         <div className="w-full flex flex-col max-w-[400px] mt-6">
-          <TextInput
-            label="Event name"
-            placeholder="Amazin summer grill"
-            type="text"
-            value={enteredName}
-            setValue={setEnteredNameHandler}
-          />
+          <div className="flex flex-row justify-between gap-1">
+            <div className="w-3/4">
+              <TextInput
+                label="Event name"
+                placeholder="Amazin summer grill"
+                type="text"
+                value={enteredName}
+                setValue={setEnteredNameHandler}
+              />
+            </div>
+            <div className="w-1/4">
+              <TextInput
+                label="Cover color"
+                type="color"
+                value={enteredCoverColor}
+                setValue={setEnteredCoverColorHandler}
+              />
+            </div>
+          </div>
+
           <DatetimePicker
             value={enteredDatetime}
             setValue={setEnteredDatetimeHandler}
@@ -207,7 +232,7 @@ export default function CreateEvent() {
   // Page 2
   const page2 = (
     <div className="flex flex-col justify-center items-center pt-6">
-    <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white flex flex-col justify-center">
+      <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white flex flex-col justify-center">
         {errors.length > 1 && (
           <FixedBanner
             messages={errors}

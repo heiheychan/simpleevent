@@ -1,6 +1,5 @@
 import { MdOutlineLocationOn } from "react-icons/md";
 import { PiCrownSimpleBold } from "react-icons/pi";
-import { HiDotsVertical } from 'react-icons/hi'
 
 import { dayList } from "@/lib/dayList";
 import CopyButton from "@/app/components/CopyButton";
@@ -11,6 +10,7 @@ export default function EventCard({
   datetime,
   name,
   location,
+  covercolor,
   host,
   joined,
   setClickDisable
@@ -31,9 +31,9 @@ export default function EventCard({
   return (
     <>
       {/* Top part */}
-      <div className="relative h-12 bg-gray-100 rounded-tl-lg rounded-tr-lg flex items-center px-4">
+      <div className="relative h-12 rounded-tl-lg rounded-tr-lg flex items-center px-4" style={{backgroundColor: covercolor}}>
         {host && (
-          <div className="h-6 w-[150px] rounded-full bg-yellow-300 text-xs flex justify-center items-center font-bold">
+          <div className="h-6 w-[150px] rounded-full bg-yellow-200 text-gray-900 text-xs flex justify-center items-center">
             <PiCrownSimpleBold className="mr-1" />
             hosted by you
           </div>
@@ -46,7 +46,7 @@ export default function EventCard({
         )}
       </div>
       {/* Bottom part */}
-      <div className="px-4 py-6 bg-white rounded-bl-lg rounded-br-lg">
+      <div className="p-4 bg-white rounded-bl-lg rounded-br-lg">
         <div className="flex flex-row justify-between mb-1">
           {joined ? (
             <p className="text-sm flex flex-row items-center text-orange-500 font-bold">

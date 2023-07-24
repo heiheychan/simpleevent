@@ -9,6 +9,7 @@ export default function TextInput({
   subtext,
   subtextcolor,
   disable,
+  name,
   min,
   max
 }) {
@@ -26,6 +27,7 @@ export default function TextInput({
         disabled={disable ? "disabled" : ""}
         min={min}
         max={max}
+        name={name}
       ></input>
       {subtext && <p className={`${subtextClass} mb-2`}>{subtext}</p>}
     </div>

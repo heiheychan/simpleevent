@@ -11,7 +11,8 @@ export async function POST(request) {
       foods: {
         select: {
           id: true,
-          name: true
+          name: true,
+          order: true
         }
       }
     }

@@ -17,6 +17,7 @@ export default async function Home() {
     <div className="flex flex-col justify-center items-center">
       <HomeHeader />
       <HomeForm />
+      <div className="h-[200px]"></div>
       <Footer />
     </div>
   );

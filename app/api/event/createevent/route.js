@@ -16,6 +16,7 @@ export async function POST(request) {
       datetime: new Date(body.eventdatetime),
       maxguests: +body.numguest,
       location: body.location,
+      covercolor: body.covercolor,
       id: uid(),
       users: {
         create: [
@@ -37,7 +38,7 @@ export async function POST(request) {
   });
 
   await prisma.food.createMany({
-    data: readyFoodList,
+    data: [...readyFoodList],
   });
 
   return new Response(JSON.stringify({ success: true }), { status: 200 });

@@ -6,8 +6,11 @@ import { HiDotsVertical } from "react-icons/hi";
 import { useInView } from "react-intersection-observer";
 
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function CardDropdown({ id, host, setClickDisable }) {
+  const router = useRouter();
   const [ref, inView] = useInView({
     triggerOnce: false,
     rootMargin: "0px 0px",
@@ -22,6 +25,18 @@ export default function CardDropdown({ id, host, setClickDisable }) {
       }
     }
   }, [inView]);
+
+  const onDeleteEventHandler = async () => {
+    const response = await axios.post("/api/event/deleteevent", {
+      eventId: id,
+    });
+
+    if (response.data.delete) {
+      router.push(`/`);
+    } else {
+      router.push(`/e/${id}`);
+    }
+  };
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -53,12 +68,12 @@ export default function CardDropdown({ id, host, setClickDisable }) {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link
-                    href="#"
-                    className="px-4 py-2 text-sm hover:bg-gray-100"
+                  <button
+                    onClick={onDeleteEventHandler}
+                    className="px-4 py-2 text-sm hover:bg-gray-100 text-left"
                   >
                     Delete event
-                  </Link>
+                  </button>
                 </Menu.Item>
               </>
             ) : (

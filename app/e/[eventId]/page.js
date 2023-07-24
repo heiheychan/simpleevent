@@ -1,11 +1,11 @@
 import EventCard from "@/app/dashboard/components/eventCard";
 import { prisma } from "@/lib/db";
-import EventFoodList from "./components/eventFoodList";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import HomeForm from "@/app/components/HomeForm";
 import { LiaCocktailSolid, LiaCookieBiteSolid } from "react-icons/lia";
 import JoinEvent from "./components/joinEvent";
+import FoodList from "./components/foodList";
 
 export default async function EventDetail({ params }) {
   const eventId = params.eventId;
@@ -21,12 +21,11 @@ export default async function EventDetail({ params }) {
       name: true,
       location: true,
       maxguests: true,
+      covercolor: true,
     },
   });
 
   if (event !== null) <div>Event not found</div>;
-
-  
 
   const record = await prisma.EventsOnUsers.findMany({
     where: {
@@ -55,15 +54,19 @@ export default async function EventDetail({ params }) {
         datetime={event.datetime.toISOString()}
         name={event.name}
         location={event.location}
+        covercolor={event.covercolor}
         joined={joined}
         host={host}
       />
-      <div className="w-full max-h-[400px] flex flex-col justify-center items-center p-4 pt-0">
-        {joined ? (
-          <EventFoodList eventId={eventId} maxguests={event.maxguests} />
-        ) : (
-          <JoinEvent eventId={eventId} />
+      <div className="w-full max-h-[500px] flex flex-col justify-center items-center p-4 pt-0">
+        {joined && (
+          <FoodList
+            eventId={eventId}
+            maxguests={event.maxguests}
+            host={host}
+          />
         )}
+        {!joined && <JoinEvent eventId={eventId} />}
       </div>
     </>
   );
