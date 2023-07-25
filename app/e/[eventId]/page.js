@@ -1,51 +1,38 @@
+"use client";
+
 import EventCard from "@/app/dashboard/components/eventCard";
-import { prisma } from "@/lib/db";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
 import HomeForm from "@/app/components/HomeForm";
 import { LiaCocktailSolid, LiaCookieBiteSolid } from "react-icons/lia";
 import JoinEvent from "./components/joinEvent";
 import FoodList from "./components/foodList";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
-export default async function EventDetail({ params }) {
-  const eventId = params.eventId;
-  const session = await getServerSession(authOptions);
+export default function EventDetail({ params }) {
+  const { status } = useSession();
+  const [joined, setJoined] = useState(false);
+  const [host, setHost] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [event, setEvent] = useState({});
+  const { eventId } = params;
 
-  const event = await prisma.event.findUnique({
-    where: {
-      id: eventId,
-    },
-    select: {
-      id: true,
-      datetime: true,
-      name: true,
-      location: true,
-      maxguests: true,
-      covercolor: true,
-    },
-  });
+  const fetchData = async () => {
+    const promise_one = axios.post("/api/event/getevent", { eventId });
+    const promise_two = axios.post("/api/event/geteventdirect", { eventId });
+    const response = await Promise.all([promise_one, promise_two]);
+    const [eventou, event] = response;
+    if (eventou.data.events.length > 0) {
+      setJoined(true);
+      setHost(eventou.data.events[0].host);
+    }
+    setEvent({ ...event.data.response });
+    setLoading(false);
+  };
 
-  if (event !== null) <div>Event not found</div>;
-
-  const record = await prisma.EventsOnUsers.findMany({
-    where: {
-      eventId: eventId,
-      user: {
-        email: session?.user.email,
-      },
-    },
-  });
-
-  let joined;
-  let host;
-
-  if (record.length > 0) {
-    joined = true;
-    host = record[0].host;
-  } else {
-    joined = false;
-    host = false;
-  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const eventDetails = (
     <>
@@ -82,9 +69,11 @@ export default async function EventDetail({ params }) {
 
   return (
     <div className="flex flex-col items-center pt-8">
-      <div className="w-full sm:w-[400px] bg-white rounded-lg border border-gray-500">
-        {session?.user ? eventDetails : homeForm}
-      </div>
+      {!loading && (
+        <div className="w-full sm:w-[400px] bg-white rounded-lg border border-gray-500">
+          {status === "authenticated" ? eventDetails : homeForm}
+        </div>
+      )}
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import Head from "next/head";
 import "./globals.css";
-import { headers } from "next/headers";
 
 export const metadata = {
   title: "Simple event",
@@ -13,9 +12,6 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-  const headersList = headers();
-  const header_url = headersList.get("x-url") || "";
-  const url = new URL(header_url);
 
   return (
     <html lang="en">
@@ -26,6 +22,7 @@ export default async function RootLayout({ children }) {
         />
       </Head>
       <body suppressHydrationWarning={true} className="containter bg-gray-100">
+
         <NextAuthProvider>
             <NavBar session={session} />
             {children}
