@@ -181,7 +181,7 @@ export default function CreateEvent() {
             <div className="w-3/4">
               <TextInput
                 label="Event name"
-                placeholder="Amazin summer grill"
+                placeholder="Summer portluck"
                 type="text"
                 value={enteredName}
                 setValue={setEnteredNameHandler}

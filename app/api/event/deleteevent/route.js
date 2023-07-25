@@ -7,9 +7,6 @@ export async function POST(request) {
   const eventId = body.eventId;
   const session = await getServerSession(authOptions);
 
-  console.log("eventId", eventId);
-  console.log("session email", session.user.email);
-
   const user = await prisma.user.findUnique({
     select: {
       id: true

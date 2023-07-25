@@ -38,6 +38,16 @@ export default function CardDropdown({ id, host, setClickDisable }) {
     }
   };
 
+  const onLeaveEventHandler = async () => {
+    const response = await axios.post("/api/user/leaveevent", {
+      eventId: id,
+    });
+
+    if (response.status === 200) {
+      router.push(`/e/${id}?leave=true`);
+    }
+  }
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -79,12 +89,12 @@ export default function CardDropdown({ id, host, setClickDisable }) {
             ) : (
               <>
                 <Menu.Item>
-                  <Link
-                    href="#"
+                  <button
+                    onClick={onLeaveEventHandler}
                     className="px-4 py-2 text-sm hover:bg-gray-100"
                   >
                     Leave event
-                  </Link>
+                  </button>
                 </Menu.Item>
               </>
             )}

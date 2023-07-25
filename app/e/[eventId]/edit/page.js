@@ -86,7 +86,7 @@ export default function EditEvent({ params }) {
             <div className="w-3/4">
               <TextInput
                 label="Event name"
-                placeholder="Amazin summer grill"
+                placeholder="Summer portluck"
                 type="text"
                 value={formInput.name}
                 name="name"
