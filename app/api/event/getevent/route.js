@@ -6,6 +6,12 @@ export async function POST(request) {
   const body = await request.json();
   const session = await getServerSession(authOptions);
 
+  if (!session) {
+    return new Response(JSON.stringify({ events: [] }), {
+      status: 200,
+    });
+  }
+
   const user = await prisma.user.findUnique({
     select: {
       id: true,
