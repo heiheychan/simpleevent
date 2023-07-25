@@ -24,8 +24,8 @@ export default function EventCard({
   const ampm = hour < 13 ? "AM" : "PM";
   hour = hour % 12;
   let min = utc.getMinutes();
-  if (min === 0) {
-    min = min.toString() + "0";
+  if (min < 10) {
+    min = "0" + min.toString();
   }
 
   return (

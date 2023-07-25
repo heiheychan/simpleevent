@@ -72,7 +72,7 @@ export default function EditEvent({ params }) {
     });
 
     if (response.status === 200) {
-      router.push(`/e/${eventId}?u=true`);
+      window.location.href = `/e/${eventId}`
       return;
     }
   };
