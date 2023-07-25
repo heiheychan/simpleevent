@@ -51,7 +51,7 @@ export default async function EventDetail({ params }) {
     <>
       <EventCard
         id={event.id}
-        datetime={event.datetime}
+        datetime={event.datetime.toISOString()}
         name={event.name}
         location={event.location}
         covercolor={event.covercolor}
@@ -60,11 +60,7 @@ export default async function EventDetail({ params }) {
       />
       <div className="w-full max-h-[500px] flex flex-col justify-center items-center p-4 pt-0">
         {joined && (
-          <FoodList
-            eventId={eventId}
-            maxguests={event.maxguests}
-            host={host}
-          />
+          <FoodList eventId={eventId} maxguests={event.maxguests} host={host} />
         )}
         {!joined && <JoinEvent eventId={eventId} />}
       </div>

@@ -22,6 +22,7 @@ export default function EventCard({
   const date = utc.getDate();
   let hour = utc.getHours();
   const ampm = hour < 13 ? "AM" : "PM";
+  hour = hour % 12;
   let min = utc.getMinutes();
   if (min < 10) {
     min = "0" + min.toString();
