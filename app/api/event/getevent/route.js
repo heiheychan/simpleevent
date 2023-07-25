@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 
 export async function POST(request) {
-  console.log("getevent API")
   const body = await request.json();
   const session = await getServerSession(authOptions);
 

@@ -26,6 +26,7 @@ export default function EventDetail({ params }) {
       setJoined(true);
       setHost(eventou.data.events[0].host);
     }
+    console.log(event.data.response)
     setEvent({ ...event.data.response });
     setLoading(false);
   };

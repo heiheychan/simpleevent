@@ -8,6 +8,7 @@ export async function POST(request) {
       id: body.eventId,
     },
     select: {
+      id: true,
       name: true,
       datetime: true,
       location: true,
