@@ -13,25 +13,44 @@ export default function EventCard({
   covercolor,
   host,
   joined,
-  setClickDisable
+  setClickDisable,
 }) {
-  const utc = new Date(datetime);
+  console.log(typeof datetime);
+  let day, month, date, hour, min, ampm;
 
-  const day = dayList[utc.getDay()];
-  const month = utc.getMonth() + 1;
-  const date = utc.getDate();
-  let hour = utc.getHours();
-  const ampm = hour < 13 ? "AM" : "PM";
-  hour = hour % 12;
-  let min = utc.getMinutes();
-  if (min < 10) {
-    min = "0" + min.toString();
+  if (typeof datetime === "string") {
+    const utc = new Date(datetime);
+
+    day = dayList[utc.getDay()];
+    month = utc.getMonth() + 1;
+    date = utc.getDate();
+    hour = utc.getHours();
+    ampm = hour < 13 ? "AM" : "PM";
+    hour = hour % 12;
+    min = utc.getMinutes();
+    if (min < 10) {
+      min = "0" + min.toString();
+    }
+  } else {
+    day = dayList[datetime.getDay()];
+    month = datetime.getMonth() + 1;
+    date = datetime.getDate();
+    hour = datetime.getHours();
+    ampm = hour < 13 ? "AM" : "PM";
+    hour = hour % 12;
+    min = datetime.getMinutes();
+    if (min < 10) {
+      min = "0" + min.toString();
+    }
   }
 
   return (
     <>
       {/* Top part */}
-      <div className="relative h-12 rounded-tl-lg rounded-tr-lg flex items-center px-4" style={{backgroundColor: covercolor}}>
+      <div
+        className="relative h-12 rounded-tl-lg rounded-tr-lg flex items-center px-4"
+        style={{ backgroundColor: covercolor }}
+      >
         {host && (
           <div className="h-6 w-[150px] rounded-full bg-yellow-200 text-gray-900 text-xs flex justify-center items-center">
             <PiCrownSimpleBold className="mr-1" />
@@ -41,7 +60,11 @@ export default function EventCard({
         {joined && (
           <div className="absolute -bottom-4 right-4 flex flex-row gap-2">
             <CopyButton id={id} name={name} />
-            <CardDropdown id={id} host={host} setClickDisable={setClickDisable} />
+            <CardDropdown
+              id={id}
+              host={host}
+              setClickDisable={setClickDisable}
+            />
           </div>
         )}
       </div>

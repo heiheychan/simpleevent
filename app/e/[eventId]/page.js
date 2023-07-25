@@ -51,7 +51,7 @@ export default async function EventDetail({ params }) {
     <>
       <EventCard
         id={event.id}
-        datetime={event.datetime.toISOString()}
+        datetime={event.datetime}
         name={event.name}
         location={event.location}
         covercolor={event.covercolor}
