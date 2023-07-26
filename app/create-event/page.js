@@ -181,7 +181,7 @@ export default function CreateEvent() {
             <div className="w-3/4">
               <TextInput
                 label="Event name"
-                placeholder="Summer portluck"
+                placeholder="Summer picnic"
                 type="text"
                 value={enteredName}
                 setValue={setEnteredNameHandler}
@@ -203,7 +203,7 @@ export default function CreateEvent() {
           />
           <TextInput
             label="Location"
-            placeholder="Bill's backyard"
+            placeholder="Sheep Meadow, Central Park"
             type="text"
             value={enteredLocation}
             setValue={setEnteredLocationHandler}

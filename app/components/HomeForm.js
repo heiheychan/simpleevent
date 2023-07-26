@@ -54,7 +54,7 @@ export default function HomeForm() {
       {error.length > 0 && <FixedBanner color="bg-red-500" messages={error} setMessages={setError}/>}
       <TextInput
         placeholder="house@party.com"
-        label="📮 Enter your email to get started"
+        label="🎊 Enter your email to join the party"
         value={email}
         setValue={setEmailHandler}
       />

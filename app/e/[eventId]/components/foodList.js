@@ -9,7 +9,7 @@ import EditFoodList from "./editFoodList";
 
 export default function FoodList({ eventId, maxguests, host }) {
   const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [foodList, setFoodList] = useState([]);
 

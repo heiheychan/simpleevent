@@ -8,11 +8,13 @@ import FoodList from "./components/foodList";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { CgSpinner } from "react-icons/cg";
+import EventBlurWrapper from "@/app/components/EventBlurWrapper";
 
 export default function EventDetail({ params }) {
   const { status } = useSession();
   const [joined, setJoined] = useState(false);
-  const [host, setHost] = useState(true);
+  const [host, setHost] = useState(false);
   const [loading, setLoading] = useState(true);
   const [event, setEvent] = useState({});
   const { eventId } = params;
@@ -26,7 +28,6 @@ export default function EventDetail({ params }) {
       setJoined(true);
       setHost(eventou.data.events[0].host);
     }
-    console.log(event.data.response)
     setEvent({ ...event.data.response });
     setLoading(false);
   };
@@ -56,25 +57,37 @@ export default function EventDetail({ params }) {
   );
 
   const homeForm = (
-    <div className="px-2 py-8 h-80 flex flex-col justify-between items-center">
-      <h1 className="mb-4 text-2xl font-light ">
-        You&apos;re invited to <span className="underline">{event.name}</span>
-      </h1>
-      <HomeForm />
-      <div className="flex">
-        <LiaCocktailSolid size={30} />
-        <LiaCookieBiteSolid size={30} />
+    <EventBlurWrapper blurLevel="m">
+      <div className="px-2 py-8 h-80 flex flex-col justify-between items-center drop-shadow-lg">
+        <h1 className="mb-2 text-2xl font-bold">
+          You&apos;re invited to <span className="underline">{event.name}</span>
+        </h1>
+        <p className="text-gray-700 mb-2 text-xs">Let's see what other guests are bringing</p>
+        <HomeForm />
+        <div className="flex">
+          <LiaCocktailSolid size={30} />
+          <LiaCookieBiteSolid size={30} />
+        </div>
       </div>
-    </div>
+    </EventBlurWrapper>
   );
 
   return (
-    <div className="flex flex-col items-center pt-8">
-      {!loading && (
-        <div className="w-full sm:w-[400px] bg-white rounded-lg border border-gray-500">
-          {status === "authenticated" ? eventDetails : homeForm}
+    <>
+      {loading && (
+        <div className="flex flex-col items-center pt-8">
+          <div className="w-full min-h-[330px] sm:w-[400px] bg-white rounded-lg border border-gray-500 flex justify-center items-center">
+            <CgSpinner className="animate-spin ml-2" size={30} />
+          </div>
         </div>
       )}
-    </div>
+      <div className="flex flex-col items-center pt-8">
+        {!loading && (
+          <div className="w-full sm:w-[400px] bg-white rounded-lg border border-gray-500">
+            {status === "authenticated" ? eventDetails : homeForm}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
