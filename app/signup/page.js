@@ -17,7 +17,7 @@ export default async function Signup() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white">
+      <div className="w-full sm:w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white">
         <h1 className="text-4xl font-light mb-2">Welcome to Simple event.</h1>
         <p className="text-gray-500">Please fill in your basic info</p>
         <SignupForm email={filledEmail} />

@@ -60,11 +60,11 @@ export default function EventDetail({ params }) {
 
   const homeForm = (
     <EventBlurWrapper blurLevel="l">
-      <div className="px-4 py-8 h-80 flex flex-col justify-between items-center drop-shadow-lg">
-        <h1 className="mb-2 text-2xl font-bold">
+      <div className="px-4 py-8 h-80 flex flex-col justify-between items-center drop-shadow-lg ">
+        <h1 className="mb-2 text-2xl font-bold text-center">
           You&apos;re invited to <span className="underline">{event.name}</span>
         </h1>
-        <p className="text-gray-700 mb-2 text-xs">
+        <p className="text-gray-700 mb-2 text-xs text-center">
           Let&apos;s see what other guests are bringing
         </p>
         <HomeForm />

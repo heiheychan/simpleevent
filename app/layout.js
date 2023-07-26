@@ -21,7 +21,7 @@ export default async function RootLayout({ children }) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
       </Head>
-      <body suppressHydrationWarning={true} className="containter bg-gray-100">
+      <body suppressHydrationWarning={true} className="containter bg-gray-100 px-2 sm:px-0">
 
         <NextAuthProvider>
             <NavBar session={session} />

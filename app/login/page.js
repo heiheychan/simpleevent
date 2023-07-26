@@ -17,7 +17,7 @@ export default async function Login() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white">
+      <div className="w-full sm:w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white">
         <h1 className="text-4xl font-light mb-6">Welcome back!</h1>
         <LoginForm email={filledEmail} />
       </div>
