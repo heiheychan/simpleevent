@@ -39,7 +39,7 @@ export default function LoginForm({ email }) {
         <FixedBanner color="bg-red-500" messages={error} />
       )}
       <TextInput
-        type="text"
+        type="email"
         placeholder="example@example.com"
         label="Email address*"
         value={email}

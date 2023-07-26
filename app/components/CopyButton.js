@@ -26,10 +26,7 @@ export default function CopyButton({ name, id }) {
       )}
 
       <CopyToClipboard
-        text={`
-          You are invited to ${name}!
-          Join on Simple event: ${process.env.NEXT_PUBLIC_BASE_URL}/e/${id}
-          `}
+        text={`You are invited to ${name}! Join on Simple event: ${process.env.NEXT_PUBLIC_BASE_URL}/e/${id}`}
       >
         <button
           onClick={copyClickHandler}

@@ -57,6 +57,7 @@ export default function HomeForm() {
         label="🎊 Enter your email to join the party"
         value={email}
         setValue={setEmailHandler}
+        type="email"
       />
       <Button content="Log in / Sign up" onClickHandler={formSubmitHandler} bgcolor="bg-orange-500" />
     </div>

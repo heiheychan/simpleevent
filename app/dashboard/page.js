@@ -44,10 +44,10 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col items-center">
       <div className="max-w-[390px] pt-8 flex flex-col">
-        <div className="flex flex-row items-center mb-2">
+        <div className="flex flex-row items-center mb-2 justify-center sm:justify-start">
           <h1
             className={`mr-4 text-2xl font-light ${
-              comingEvents ? "underline text-orange-500" : "text-gray-300"
+              comingEvents ? "underline text-orange-500" : "text-gray-400"
             }`}
             onClick={() => {
               setComingEvents(true);
@@ -57,7 +57,7 @@ export default function Dashboard() {
           </h1>
           <h1
             className={`text-2xl font-light ${
-              !comingEvents ? "underline text-orange-500" : "text-gray-300"
+              !comingEvents ? "underline text-orange-500" : "text-gray-400"
             }`}
             onClick={() => {
               setComingEvents(false);

@@ -58,9 +58,9 @@ export default function SignupForm({ email }) {
     <div className="w-full flex flex-col mt-6">
       {error.length > 0 && <FixedBanner color="bg-red-500" messages={error} />}
       <TextInput
-        placeholder="example@example.com"
+        placeholder="house@party.com"
         label="Email address*"
-        type="text"
+        type="email"
         disable={true}
         value={email}
       />
