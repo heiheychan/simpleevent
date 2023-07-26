@@ -62,7 +62,7 @@ export default function EventDetail({ params }) {
         <h1 className="mb-2 text-2xl font-bold">
           You&apos;re invited to <span className="underline">{event.name}</span>
         </h1>
-        <p className="text-gray-700 mb-2 text-xs">Let's see what other guests are bringing</p>
+        <p className="text-gray-700 mb-2 text-xs">Let&apos;s see what other guests are bringing</p>
         <HomeForm />
         <div className="flex">
           <LiaCocktailSolid size={30} />
