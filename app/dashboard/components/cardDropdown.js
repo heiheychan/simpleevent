@@ -44,7 +44,7 @@ export default function CardDropdown({ id, host, setClickDisable }) {
     });
 
     if (response.status === 200) {
-      router.push(`/e/${id}?leave=true`);
+      window.location.href = "/dashboard";
     }
   }
 

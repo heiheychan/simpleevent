@@ -9,9 +9,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { CgSpinner } from "react-icons/cg";
+import { deleteCookie } from "cookies-next";
 import EventBlurWrapper from "@/app/components/EventBlurWrapper";
 
 export default function EventDetail({ params }) {
+  deleteCookie("return_path");
   const { status } = useSession();
   const [joined, setJoined] = useState(false);
   const [host, setHost] = useState(false);
@@ -57,12 +59,14 @@ export default function EventDetail({ params }) {
   );
 
   const homeForm = (
-    <EventBlurWrapper blurLevel="m">
-      <div className="px-2 py-8 h-80 flex flex-col justify-between items-center drop-shadow-lg">
+    <EventBlurWrapper blurLevel="l">
+      <div className="px-4 py-8 h-80 flex flex-col justify-between items-center drop-shadow-lg">
         <h1 className="mb-2 text-2xl font-bold">
           You&apos;re invited to <span className="underline">{event.name}</span>
         </h1>
-        <p className="text-gray-700 mb-2 text-xs">Let&apos;s see what other guests are bringing</p>
+        <p className="text-gray-700 mb-2 text-xs">
+          Let&apos;s see what other guests are bringing
+        </p>
         <HomeForm />
         <div className="flex">
           <LiaCocktailSolid size={30} />

@@ -73,7 +73,7 @@ export default function Dashboard() {
               key={ele.event.id}
               href={clickDisable ? "" : `/e/${ele.event.id}`}
               className={`mb-2 w-[390px] sm:max-w-full border border-gray-500 rounded-lg ${
-                comingEvents ? "" : "pointer-events-none bg-gray-50"
+                comingEvents ? "" : " grayscale pointer-events-none bg-gray-50"
               } ${clickDisable && "cursor-default"}`}
             >
               <EventCard

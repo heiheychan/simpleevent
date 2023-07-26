@@ -15,11 +15,14 @@ export default function EventBlurWrapper({ children, blurLevel }) {
     case "l":
       blurClass = "blur-md"
       break;
+    case "xl":
+      blurClass = "blur-lg"
+      break;
   }
 
   return (
-    <div className="relative w-full h-[500px] bg-white border border-gray-500 rounded-lg flex flex-col p-4 overflow-scroll">
-      <div className={`absolute h-full w-[90%] ${blurClass}`}>
+    <div className="relative w-full h-[500px] bg-white border border-gray-500 rounded-lg flex flex-col overflow-scroll">
+      <div className={`absolute h-full w-full ${blurClass} py-8 px-4`}>
         <div className="mb-2 relative bg-white h-10 w-full rounded-full border border-gray-500 flex items-center hover:cursor-pointer">
           <div
             className={`h-[38px] bg-gradient-to-r from-green-300 to-orange-300 rounded-full`}
@@ -96,7 +99,7 @@ export default function EventBlurWrapper({ children, blurLevel }) {
           </div>
         </div>
       </div>
-      <div className="absolute w-full h-full flex justify-center items-center z-10">
+      <div className="absolute z-10 h-full w-full flex justify-center items-center">
         {children}
       </div>
     </div>
