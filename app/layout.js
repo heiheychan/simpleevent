@@ -21,11 +21,13 @@ export default async function RootLayout({ children }) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
       </Head>
-      <body suppressHydrationWarning={true} className="min-h-screen containter bg-gray-100 cover px-2 sm:px-0">
-
+      <body
+        suppressHydrationWarning={true}
+        className="min-h-screen containter bg-gray-100 cover px-2 sm:px-0"
+      >
         <NextAuthProvider>
-            <NavBar session={session} />
-            {children}
+          <NavBar session={session} />
+          {children}
         </NextAuthProvider>
       </body>
     </html>

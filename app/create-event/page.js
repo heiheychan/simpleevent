@@ -83,9 +83,6 @@ export default function CreateEvent() {
     });
   };
 
-  // ******Handle form submission******
-  // **Validate inputs**
-  // Validate food list
   const checkFoodListError = (fl) => {
     let valid = true;
 
@@ -129,14 +126,13 @@ export default function CreateEvent() {
       return { ...ele, order: index };
     });
 
-    return newfl
+    return newfl;
   };
 
   const formSubmission = async () => {
     setErrors([]);
     let tempError = [];
 
-    // Validate page 1 input
     validationSchema.forEach((check) => {
       if (!check.valid) {
         tempError.push(check.errorMessage);
@@ -150,7 +146,6 @@ export default function CreateEvent() {
       return;
     }
 
-    // Add order value to the food list
     const processedFoodList = processFoodList(foodList);
 
     const response = await axios.post("/api/event/createevent", {
@@ -167,7 +162,6 @@ export default function CreateEvent() {
     }
   };
 
-  // Page 1 content
   const page1 = (
     <div className="flex flex-col justify-center items-center pt-6">
       <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white">
@@ -227,8 +221,7 @@ export default function CreateEvent() {
       </div>
     </div>
   );
-
-  // Page 2
+  
   const page2 = (
     <div className="flex flex-col justify-center items-center pt-6">
       <div className="min-w-[390px] border border-gray-500 px-6 py-8 rounded-lg bg-white flex flex-col justify-center">

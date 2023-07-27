@@ -5,7 +5,6 @@ export async function POST(request) {
   const body = await request.json();
   const { email, password, name } = body;
 
-  // validate the inputs
   const userWithEmail = await prisma.user.findUnique({
     where: {
       email,
@@ -33,7 +32,3 @@ export async function POST(request) {
 
   return new Response(JSON.stringify({ email: user.email }), { status: 200 });
 }
-
-// req.cookies.get('cookie')
-// req.headers.get('Authorization')
-// redirect('url')

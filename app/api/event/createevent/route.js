@@ -43,7 +43,3 @@ export async function POST(request) {
 
   return new Response(JSON.stringify({ success: true }), { status: 200 });
 }
-
-// name            String
-//   datetime        DateTime
-//   location        String

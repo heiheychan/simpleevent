@@ -6,7 +6,6 @@ export async function POST(request) {
   const session = await getServerSession(authOptions);
 
   const body = await request.json();
-  // getUserId
 
   const user = await prisma.user.findUnique({
     where: {

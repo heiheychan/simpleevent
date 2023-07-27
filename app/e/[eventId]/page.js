@@ -38,6 +38,7 @@ export default function EventDetail({ params }) {
     fetchData();
   }, []);
 
+
   const eventDetails = (
     <>
       <EventCard
