@@ -2,19 +2,23 @@
 
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { BsGithub } from "react-icons/bs";
 
 export default function NavBar({ session }) {
-
   const { status } = useSession();
 
   return (
     <div className="h-14 flex justify-center px-2">
       <nav className="container flex flex-row justify-between items-center h-full">
-        <Link href="/">
-          <div className="font-serif bg-white rounded-lg border-gray-500 border w-10 h-10 flex justify-center items-center">
-            S.
-          </div>
-        </Link>
+        <div className="flex flex-row items-center gap-4">
+          <Link
+            href="https://github.com/heiheychan/simpleevent"
+            target="_blank"
+          >
+            <BsGithub size={35} />
+          </Link>
+        </div>
+
         {session?.user ? (
           <div className="h-full">
             <div className="h-full flex flex-row items-center">
