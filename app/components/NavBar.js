@@ -10,7 +10,12 @@ export default function NavBar({ session }) {
   return (
     <div className="h-14 flex justify-center px-2">
       <nav className="container flex flex-row justify-between items-center h-full">
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-row items-center gap-2">
+        <Link
+            href="/"
+          >
+            <div className="h-9 w-9 rounded-full border border-gray-500 flex justify-center items-center font-serif">S.</div>
+          </Link>
           <Link
             href="https://github.com/heiheychan/simpleevent"
             target="_blank"
