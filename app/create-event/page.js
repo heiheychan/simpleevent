@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import validator from "validator";
 import { useRouter } from "next/navigation";
+import { format } from "date-fns";
 
 import Button from "@/app/components/UI/Button";
 import DatetimePicker from "@/app/components/UI/DatetimePicker";
@@ -26,7 +27,7 @@ export default function CreateEvent() {
   };
 
   const [enteredName, setEnteredName] = useState("");
-  const [enteredDatetime, setEnteredDatetime] = useState(new Date());
+  const [enteredDatetime, setEnteredDatetime] = useState(format(new Date(),"yyyy-MM-dd'T'hh:mm"));
   const [enteredLocation, setEnteredLocation] = useState("");
   const [enteredNumGuest, setEnteredNumGuest] = useState("");
   const [enteredCoverColor, setEnteredCoverColor] = useState("#B8E0FD");
@@ -49,7 +50,6 @@ export default function CreateEvent() {
 
   const setEnteredCoverColorHandler = (e) => {
     setEnteredCoverColor(e.target.value);
-    console.log(enteredCoverColor);
   };
 
   const setFoodListHandler = (e) => {
